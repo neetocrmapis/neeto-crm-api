@@ -1,0 +1,116 @@
+components:
+  schemas:
+    # Tag object structure
+    tag:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the tag.
+        name:
+          type: string
+          description: Name of the tag.
+        style:
+          type: string
+          description: Style/color of the tag.
+
+    # Deal object structure
+    deal:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the deal.
+        name:
+          type: string
+          description: Name of the deal.
+        status:
+          type: string
+          enum: [in_progress, won, lost]
+          description: Current status of the deal.
+        value:
+          type: number
+          description: Monetary value of the deal.
+        currency:
+          type: string
+          description: Currency code for the deal value.
+        price:
+          type: string
+          description: Formatted price string (e.g. "$ 10000").
+        unique_number:
+          type: string
+          description: Auto-generated unique number for the deal.
+        contact_name:
+          type: string
+          nullable: true
+          description: Name of the associated contact.
+        contact_id:
+          type: string
+          nullable: true
+          description: Unique identifier of the associated contact.
+        company_name:
+          type: string
+          nullable: true
+          description: Name of the associated company.
+        company_id:
+          type: string
+          nullable: true
+          description: Unique identifier of the associated company.
+        owner:
+          type: object
+          nullable: true
+          description: Owner of the deal.
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the owner.
+            name:
+              type: string
+              description: Name of the owner.
+        pipeline:
+          type: object
+          nullable: true
+          description: Pipeline the deal belongs to.
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the pipeline.
+            name:
+              type: string
+              description: Name of the pipeline.
+        stage:
+          type: object
+          nullable: true
+          description: Current stage of the deal within the pipeline.
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the stage.
+            name:
+              type: string
+              description: Name of the stage.
+        tags:
+          type: array
+          items:
+            $ref: "#/components/schemas/tag"
+          description: Tags associated with the deal.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the deal was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the deal was last updated.
+
+    # Deal list response structure
+    deal_list_response:
+      type: object
+      properties:
+        deals:
+          type: array
+          items:
+            $ref: "#/components/schemas/deal"
+          description: List of deals.
+        pagination:
+          $ref: "../schemas/common.yaml#/components/schemas/pagination"

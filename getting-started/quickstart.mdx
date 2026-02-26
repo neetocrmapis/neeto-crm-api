@@ -1,0 +1,65 @@
+# Quickstart
+
+Get started with the NeetoCRM API in just a few minutes.
+
+## Prerequisites
+
+- A NeetoCRM workspace
+- An API key
+
+## Step 1: Make Your First Request
+
+Let's fetch a list of contacts from your CRM:
+
+```bash
+curl -X GET "https://your-workspace.neetocrm.com/api/external/v1/contacts" \
+  -H "X-Api-Key: your_api_key_here" \
+  -H "Content-Type: application/json"
+```
+
+## Step 2: Create a Contact
+
+Now let's create a new contact:
+
+```bash
+curl -X POST "https://your-workspace.neetocrm.com/api/external/v1/contacts" \
+  -H "X-Api-Key: your_api_key_here" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "contact": {
+      "name": "John Doe",
+      "email": "john@example.com",
+      "phone_number": "+1234567890"
+    }
+  }'
+```
+
+## Step 3: Update a Contact
+
+Update an existing contact:
+
+```bash
+curl -X PATCH "https://your-workspace.neetocrm.com/api/external/v1/contacts/1" \
+  -H "X-Api-Key: your_api_key_here" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "contact": {
+      "name": "John Smith"
+    }
+  }'
+```
+
+## Step 4: Delete a Contact
+
+Delete a contact:
+
+```bash
+curl -X DELETE "https://your-workspace.neetocrm.com/api/external/v1/contacts/1" \
+  -H "X-Api-Key: your_api_key_here"
+```
+
+## Next Steps
+
+- Learn about [pagination](/getting-started/pagination)
+- Explore the [Contacts API](/api-reference/contacts/list-contacts)
+- Check out [Deals](/api-reference/deals/list-deals) and [Leads](/api-reference/leads/list-leads)

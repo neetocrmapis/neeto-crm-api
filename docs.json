@@ -1,0 +1,139 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "NeetoCRM API",
+  "description": "NeetoCRM API docs guide to manage CRM data from external channels",
+  "theme": "mint",
+  "colors": {
+    "primary": "#10B981",
+    "light": "#34D399",
+    "dark": "#059669"
+  },
+  "logo": "/assets/logo.svg",
+  "favicon": "/assets/favicon.svg",
+  "navbar": {
+    "links": [
+      {
+        "label": "Blog",
+        "href": "https://www.neeto.com/blog"
+      },
+      {
+        "label": "Help center",
+        "href": "https://help.neetocrm.com/"
+      },
+      {
+        "label": "NeetoCRM",
+        "href": "https://neetocrm.com/"
+      }
+    ]
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/neetohq",
+      "linkedin": "https://www.linkedin.com/company/neeto",
+      "youtube": "https://www.youtube.com/channel/UCoQ3Kv2JdZ51WZJ3QFFcI9g",
+      "slack": "https://www.launchpass.com/neetohq"
+    }
+  },
+  "navigation": {
+    "pages": [
+      {
+        "group": "Getting Started",
+        "icon": "rocket",
+        "pages": [
+          "getting-started/introduction",
+          "getting-started/identifying-subdomain",
+          "getting-started/authentication",
+          "getting-started/quickstart",
+          "getting-started/pagination",
+          "getting-started/response-codes"
+        ]
+      },
+      {
+        "group": "Contacts API",
+        "icon": "users",
+        "pages": [
+          "api-reference/contacts/list-contacts",
+          "api-reference/contacts/get-contact",
+          "api-reference/contacts/create-contact",
+          "api-reference/contacts/update-contact",
+          "api-reference/contacts/delete-contact"
+        ]
+      },
+      {
+        "group": "Companies API",
+        "icon": "building",
+        "pages": [
+          "api-reference/companies/list-companies",
+          "api-reference/companies/get-company",
+          "api-reference/companies/create-company",
+          "api-reference/companies/update-company",
+          "api-reference/companies/delete-company"
+        ]
+      },
+      {
+        "group": "Deals API",
+        "icon": "briefcase",
+        "pages": [
+          "api-reference/deals/list-deals",
+          "api-reference/deals/get-deal",
+          "api-reference/deals/create-deal",
+          "api-reference/deals/update-deal",
+          "api-reference/deals/delete-deal"
+        ]
+      },
+      {
+        "group": "Leads API",
+        "icon": "target",
+        "pages": [
+          "api-reference/leads/list-leads",
+          "api-reference/leads/get-lead",
+          "api-reference/leads/create-lead",
+          "api-reference/leads/update-lead",
+          "api-reference/leads/delete-lead"
+        ]
+      },
+      {
+        "group": "Tasks API",
+        "icon": "check-square",
+        "pages": [
+          "api-reference/tasks/list-tasks",
+          "api-reference/tasks/get-task",
+          "api-reference/tasks/create-task",
+          "api-reference/tasks/update-task",
+          "api-reference/tasks/delete-task"
+        ]
+      },
+      {
+        "group": "Notes API",
+        "icon": "file-text",
+        "pages": [
+          "api-reference/notes/list-notes",
+          "api-reference/notes/create-note",
+          "api-reference/notes/update-note",
+          "api-reference/notes/delete-note"
+        ]
+      }
+    ]
+  },
+  "api": {
+    "params": {
+      "expanded": "all"
+    },
+    "playground": {
+      "display": "interactive",
+      "proxy": true
+    },
+    "examples": {
+      "languages": ["curl", "javascript", "python"],
+      "defaults": "all"
+    }
+  },
+  "styling": {
+    "eyebrows": "section",
+    "codeblocks": "system"
+  },
+  "appearance": {
+    "default": "light",
+    "strict": true
+  }
+}

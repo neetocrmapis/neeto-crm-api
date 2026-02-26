@@ -1,0 +1,41 @@
+openapi: 3.0.3
+info:
+  title: NeetoCRM Leads APIs
+  version: 1.0.0
+
+servers:
+  $ref: '../schemas/common.yaml#/servers'
+
+tags:
+  - name: Leads
+    description: APIs to list leads in your workspace.
+
+paths:
+  /leads:
+    get:
+      summary: List all leads
+      tags:
+        - Leads
+      description: Retrieve a paginated list of all leads in your workspace. Results are ordered by creation date (newest first).
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - $ref: '../schemas/common.yaml#/accept_header'
+        - $ref: '../schemas/common.yaml#/page_number_param'
+        - $ref: '../schemas/common.yaml#/page_size_param'
+      responses:
+        '200':
+          description: Successfully retrieved leads.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/lead.yaml#/components/schemas/lead_list_response'
+        '401':
+          description: Unauthorized - Invalid or missing API key.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Could not authenticate, invalid API Key"

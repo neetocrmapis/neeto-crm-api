@@ -1,0 +1,42 @@
+---
+title: Get Lead
+openapi: get /leads/{id}
+---
+
+# Get Lead
+
+Retrieve a single lead by ID.
+
+## Request
+
+```bash
+GET /api/external/v1/leads/:id
+```
+
+## Response
+
+```json
+{
+  "lead": {
+    "id": "1",
+    "name": "John Doe",
+    "status": "new",
+    "company_id": "1",
+    "contact_id": "1",
+    "owner_id": "1",
+    "organization_id": "1",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z",
+    "tag_ids": [1, 2],
+    "company": {
+      "id": "1",
+      "name": "Acme Inc"
+    },
+    "contact": {
+      "id": "1",
+      "name": "John Doe",
+      "email": "john@example.com"
+    }
+  }
+}
+```

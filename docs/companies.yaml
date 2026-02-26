@@ -1,0 +1,41 @@
+openapi: 3.0.3
+info:
+  title: NeetoCRM Companies APIs
+  version: 1.0.0
+
+servers:
+  $ref: '../schemas/common.yaml#/servers'
+
+tags:
+  - name: Companies
+    description: APIs to list companies in your workspace.
+
+paths:
+  /companies:
+    get:
+      summary: List all companies
+      tags:
+        - Companies
+      description: Retrieve a paginated list of all companies in your workspace. Results are ordered by creation date (newest first).
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - $ref: '../schemas/common.yaml#/accept_header'
+        - $ref: '../schemas/common.yaml#/page_number_param'
+        - $ref: '../schemas/common.yaml#/page_size_param'
+      responses:
+        '200':
+          description: Successfully retrieved companies.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/company.yaml#/components/schemas/company_list_response'
+        '401':
+          description: Unauthorized - Invalid or missing API key.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Could not authenticate, invalid API Key"

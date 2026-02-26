@@ -1,0 +1,66 @@
+---
+title: Create Deal
+openapi: post /deals
+---
+
+# Create Deal
+
+Create a new deal in your CRM.
+
+## Request
+
+```bash
+POST /api/external/v1/deals
+```
+
+## Request Body
+
+| Parameter   | Type    | Required | Description                  |
+| ----------- | ------- | -------- | ---------------------------- |
+| name        | string  | Yes      | Deal name                    |
+| value       | decimal | No       | Deal value                   |
+| currency    | string  | No       | Currency code (default: USD) |
+| status      | string  | No       | Deal status                  |
+| company_id  | integer | No       | Associated company ID        |
+| contact_id  | integer | No       | Associated contact ID        |
+| owner_id    | integer | No       | Owner user ID                |
+| stage_id    | integer | No       | Stage ID                     |
+| pipeline_id | integer | No       | Pipeline ID                  |
+| tag_ids     | array   | No       | Array of tag IDs             |
+
+## Example
+
+```json
+{
+  "deal": {
+    "name": "Big Deal",
+    "value": 10000,
+    "currency": "USD",
+    "company_id": 1,
+    "contact_id": 1,
+    "stage_id": 1,
+    "pipeline_id": 1
+  }
+}
+```
+
+## Response
+
+```json
+{
+  "deal": {
+    "id": "1",
+    "name": "Big Deal",
+    "value": 10000,
+    "currency": "USD",
+    "status": "in_progress",
+    "company_id": "1",
+    "contact_id": "1",
+    "stage_id": "1",
+    "pipeline_id": "1",
+    "organization_id": "1",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  }
+}
+```

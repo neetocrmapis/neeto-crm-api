@@ -1,0 +1,44 @@
+---
+title: Update Note
+openapi: patch /notes/{id}
+---
+
+# Update Note
+
+Update an existing note.
+
+## Request
+
+```bash
+PATCH /api/external/v1/notes/:id
+```
+
+## Request Body
+
+| Parameter     | Type   | Description          |
+| ------------- | ------ | -------------------- |
+| note          | object | Note object          |
+| note[content] | string | Updated note content |
+
+## Example
+
+```json
+{
+  "note": {
+    "content": "Updated note content"
+  }
+}
+```
+
+## Response
+
+```json
+{
+  "note": {
+    "id": "1",
+    "content": "Updated note content",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-02T00:00:00Z"
+  }
+}
+```

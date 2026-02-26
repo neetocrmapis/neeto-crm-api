@@ -1,0 +1,57 @@
+---
+title: Update Deal
+openapi: patch /deals/{id}
+---
+
+# Update Deal
+
+Update an existing deal.
+
+## Request
+
+```bash
+PATCH /api/external/v1/deals/:id
+```
+
+## Request Body
+
+| Parameter  | Type    | Description           |
+| ---------- | ------- | --------------------- |
+| name       | string  | Deal name             |
+| value      | decimal | Deal value            |
+| currency   | string  | Currency code         |
+| status     | string  | Deal status           |
+| company_id | integer | Associated company ID |
+| contact_id | integer | Associated contact ID |
+| owner_id   | integer | Owner user ID         |
+| stage_id   | integer | Stage ID              |
+| position   | integer | Position in pipeline  |
+
+## Example
+
+```json
+{
+  "deal": {
+    "name": "Updated Deal Name",
+    "value": 15000,
+    "stage_id": 2
+  }
+}
+```
+
+## Response
+
+```json
+{
+  "deal": {
+    "id": "1",
+    "name": "Updated Deal Name",
+    "value": 15000,
+    "status": "in_progress",
+    "stage_id": "2",
+    "organization_id": "1",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-02T00:00:00Z"
+  }
+}
+```

@@ -1,0 +1,42 @@
+# Pagination
+
+List endpoints support pagination to help you manage large datasets.
+
+## Pagination Parameters
+
+| Parameter   | Type    | Description                              |
+| ----------- | ------- | ---------------------------------------- |
+| page_number | integer | Page number to retrieve (starts at 1)    |
+| page_size   | integer | Number of records per page (default: 30) |
+
+## Example Request
+
+```bash
+curl -X GET "https://your-workspace.neetocrm.com/api/external/v1/contacts?page_number=2&page_size=25" \
+  -H "X-Api-Key: your_api_key_here"
+```
+
+## Response Structure
+
+The response includes a `pagination` object with metadata:
+
+```json
+{
+  "contacts": [...],
+  "pagination": {
+    "total_records": 150,
+    "total_pages": 6,
+    "current_page_number": 2,
+    "page_size": 25
+  }
+}
+```
+
+## Pagination Fields
+
+| Field               | Description                                |
+| ------------------- | ------------------------------------------ |
+| total_records       | Total number of records matching the query |
+| total_pages         | Total number of available pages            |
+| current_page_number | The current page number                    |
+| page_size           | Number of records per page                 |

@@ -1,0 +1,93 @@
+components:
+  schemas:
+    # Tag object structure
+    tag:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the tag.
+        name:
+          type: string
+          description: Name of the tag.
+        style:
+          type: string
+          description: Style/color of the tag.
+
+    # Lead object structure
+    lead:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the lead.
+        name:
+          type: string
+          description: Name of the lead.
+        status:
+          type: string
+          enum: [open, converted, archived]
+          description: Current status of the lead.
+        unique_number:
+          type: string
+          description: Auto-generated unique number for the lead.
+        email:
+          type: string
+          nullable: true
+          description: Email address of the lead (from associated contact).
+        phone_number:
+          type: string
+          nullable: true
+          description: Phone number of the lead (from associated contact).
+        contact_name:
+          type: string
+          nullable: true
+          description: Name of the associated contact.
+        contact_id:
+          type: string
+          nullable: true
+          description: Unique identifier of the associated contact.
+        company_name:
+          type: string
+          nullable: true
+          description: Name of the associated company.
+        company_id:
+          type: string
+          nullable: true
+          description: Unique identifier of the associated company.
+        owner:
+          type: object
+          nullable: true
+          description: Owner of the lead.
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the owner.
+            name:
+              type: string
+              description: Name of the owner.
+        tags:
+          type: array
+          items:
+            $ref: "#/components/schemas/tag"
+          description: Tags associated with the lead.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the lead was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the lead was last updated.
+
+    # Lead list response structure
+    lead_list_response:
+      type: object
+      properties:
+        leads:
+          type: array
+          items:
+            $ref: "#/components/schemas/lead"
+          description: List of leads.
+        pagination:
+          $ref: "../schemas/common.yaml#/components/schemas/pagination"

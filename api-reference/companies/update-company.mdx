@@ -1,0 +1,48 @@
+---
+title: Update Company
+openapi: patch /companies/{id}
+---
+
+# Update Company
+
+Update an existing company.
+
+## Request
+
+```bash
+PATCH /api/external/v1/companies/:id
+```
+
+## Request Body
+
+| Parameter | Type   | Description      |
+| --------- | ------ | ---------------- |
+| name      | string | Company name     |
+| address   | string | Company address  |
+| tag_ids   | array  | Array of tag IDs |
+
+## Example
+
+```json
+{
+  "company": {
+    "name": "Acme Corporation",
+    "address": "456 Business Ave"
+  }
+}
+```
+
+## Response
+
+```json
+{
+  "company": {
+    "id": "1",
+    "name": "Acme Corporation",
+    "address": "456 Business Ave",
+    "organization_id": "1",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-02T00:00:00Z"
+  }
+}
+```

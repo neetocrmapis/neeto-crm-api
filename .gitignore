@@ -1,0 +1,6 @@
+node_modules/
+.yarn/
+bundled/
+.env
+.DS_Store
+*.log

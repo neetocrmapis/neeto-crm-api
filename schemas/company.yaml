@@ -1,0 +1,59 @@
+components:
+  schemas:
+    # Tag object structure
+    tag:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the tag.
+        name:
+          type: string
+          description: Name of the tag.
+        style:
+          type: string
+          description: Style/color of the tag.
+
+    # Company object structure
+    company:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the company.
+        name:
+          type: string
+          description: Name of the company.
+        address:
+          type: string
+          nullable: true
+          description: Address of the company.
+        source:
+          type: string
+          nullable: true
+          description: Source of the company.
+        tags:
+          type: array
+          items:
+            $ref: "#/components/schemas/tag"
+          description: Tags associated with the company.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the company was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the company was last updated.
+
+    # Company list response structure
+    company_list_response:
+      type: object
+      properties:
+        companies:
+          type: array
+          items:
+            $ref: "#/components/schemas/company"
+          description: List of companies.
+        pagination:
+          $ref: "../schemas/common.yaml#/components/schemas/pagination"

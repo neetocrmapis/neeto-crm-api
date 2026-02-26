@@ -1,0 +1,31 @@
+# Response Codes
+
+The NeetoCRM API uses standard HTTP response codes to indicate the success or failure of an API request.
+
+## HTTP Status Codes
+
+| Code | Name                  | Description                             |
+| ---- | --------------------- | --------------------------------------- |
+| 200  | OK                    | Request succeeded                       |
+| 201  | Created               | Resource was successfully created       |
+| 204  | No Content            | Request succeeded, no content to return |
+| 400  | Bad Request           | Invalid request format                  |
+| 401  | Unauthorized          | Invalid or missing API key              |
+| 404  | Not Found             | Resource not found                      |
+| 422  | Unprocessable Entity  | Validation error                        |
+| 429  | Too Many Requests     | Rate limit exceeded                     |
+| 500  | Internal Server Error | Something went wrong on our end         |
+
+## Error Response Format
+
+When an error occurs, the API returns an error object:
+
+```json
+{
+  "error": "Error message describing what went wrong"
+}
+```
+
+## Rate Limiting
+
+API requests are rate limited to ensure fair usage. If you exceed the rate limit, you'll receive a 429 response. Consider implementing exponential backoff for retries.
