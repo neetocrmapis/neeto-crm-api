@@ -42,3 +42,11 @@ PATCH /api/external/v1/notes/:id
   }
 }
 ```
+
+## Error Responses
+
+| Status Code | Description                    | Example                                          |
+| ----------- | ------------------------------ | ------------------------------------------------ |
+| 401         | Invalid or missing API key     | `{"error": "Could not authenticate, invalid API Key"}` |
+| 404         | Note not found                 | `{"error": "Note not found"}`                    |
+| 422         | Validation error               | `{"errors": ["Content can't be blank"]}`         |

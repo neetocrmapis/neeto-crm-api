@@ -80,6 +80,43 @@ components:
           format: date-time
           description: Timestamp when the lead was last updated.
 
+    # Lead create/update request
+    lead_request:
+      type: object
+      properties:
+        lead:
+          type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+              description: Lead name.
+              example: "John Doe"
+            status:
+              type: string
+              enum: [open, converted, archived]
+              description: Lead status.
+              example: "open"
+            company_id:
+              type: integer
+              description: Associated company ID.
+              example: 1
+            contact_id:
+              type: integer
+              description: Associated contact ID.
+              example: 1
+            owner_id:
+              type: integer
+              description: Owner user ID.
+              example: 1
+            tag_ids:
+              type: array
+              items:
+                type: integer
+              description: Array of tag IDs.
+              example: [1, 2]
+
     # Lead list response structure
     lead_list_response:
       type: object
@@ -91,3 +128,18 @@ components:
           description: List of leads.
         pagination:
           $ref: "../schemas/common.yaml#/components/schemas/pagination"
+
+    # Single lead response
+    lead_response:
+      type: object
+      properties:
+        lead:
+          $ref: "#/components/schemas/lead"
+
+    # Delete response
+    lead_delete_response:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Lead deleted successfully"

@@ -1,0 +1,155 @@
+components:
+  schemas:
+    # Task object structure
+    task:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the task.
+        title:
+          type: string
+          description: Title of the task.
+        description:
+          type: string
+          nullable: true
+          description: Description of the task.
+        status:
+          type: string
+          description: Current status of the task.
+        priority:
+          type: string
+          description: Priority level of the task.
+        due_date:
+          type: string
+          format: date
+          nullable: true
+          description: Due date of the task.
+        due_time:
+          type: string
+          nullable: true
+          description: Due time of the task.
+        owner_id:
+          type: string
+          nullable: true
+          description: Unique identifier of the owner.
+        contact_id:
+          type: string
+          nullable: true
+          description: Unique identifier of the associated contact.
+        company_id:
+          type: string
+          nullable: true
+          description: Unique identifier of the associated company.
+        deal_id:
+          type: string
+          nullable: true
+          description: Unique identifier of the associated deal.
+        lead_id:
+          type: string
+          nullable: true
+          description: Unique identifier of the associated lead.
+        organization_id:
+          type: string
+          description: Unique identifier of the organization.
+        owner:
+          type: object
+          nullable: true
+          description: Owner of the task.
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the owner.
+            name:
+              type: string
+              description: Name of the owner.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the task was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the task was last updated.
+
+    # Task create/update request
+    task_request:
+      type: object
+      properties:
+        task:
+          type: object
+          required:
+            - title
+          properties:
+            title:
+              type: string
+              description: Task title.
+              example: "Follow up with client"
+            description:
+              type: string
+              description: Task description.
+              example: "Send proposal"
+            status:
+              type: string
+              description: Task status.
+              example: "pending"
+            priority:
+              type: string
+              description: Task priority.
+              example: "high"
+            due_date:
+              type: string
+              format: date
+              description: Due date.
+              example: "2024-01-15"
+            due_time:
+              type: string
+              description: Due time.
+              example: "14:00"
+            owner_id:
+              type: integer
+              description: Owner user ID.
+              example: 1
+            contact_id:
+              type: integer
+              description: Associated contact ID.
+              example: 1
+            company_id:
+              type: integer
+              description: Associated company ID.
+              example: 1
+            deal_id:
+              type: integer
+              description: Associated deal ID.
+              example: 1
+            lead_id:
+              type: integer
+              description: Associated lead ID.
+              example: 1
+
+    # Task list response structure
+    task_list_response:
+      type: object
+      properties:
+        tasks:
+          type: array
+          items:
+            $ref: "#/components/schemas/task"
+          description: List of tasks.
+        pagination:
+          $ref: "../schemas/common.yaml#/components/schemas/pagination"
+
+    # Single task response
+    task_response:
+      type: object
+      properties:
+        task:
+          $ref: "#/components/schemas/task"
+
+    # Delete response
+    task_delete_response:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Task deleted successfully"

@@ -1,8 +1,76 @@
 ---
-title: "List all deals"
-openapi: "/bundled/deals.yaml GET /deals"
+title: List Deals
+openapi: get /deals
 ---
 
-import SubdomainInfo from "/snippets/subdomain-info.mdx";
+# List Deals
 
-<SubdomainInfo />
+Retrieve a paginated list of deals in your CRM.
+
+## Request
+
+```bash
+GET /api/external/v1/deals
+```
+
+## Query Parameters
+
+| Parameter   | Type    | Description                    |
+| ----------- | ------- | ------------------------------ |
+| page_number | integer | Page number (default: 1)       |
+| page_size   | integer | Records per page (default: 30) |
+
+## Response
+
+```json
+{
+  "deals": [
+    {
+      "id": "1",
+      "name": "Big Deal",
+      "status": "in_progress",
+      "value": 10000,
+      "currency": "USD",
+      "price": "$ 10000",
+      "unique_number": "DEL-001",
+      "contact_name": "John Doe",
+      "contact_id": "1",
+      "company_name": "Acme Inc",
+      "company_id": "1",
+      "owner": {
+        "id": "1",
+        "name": "Jane Smith"
+      },
+      "pipeline": {
+        "id": "1",
+        "name": "Sales Pipeline"
+      },
+      "stage": {
+        "id": "1",
+        "name": "Qualification"
+      },
+      "tags": [
+        {
+          "id": "1",
+          "name": "enterprise",
+          "style": "blue"
+        }
+      ],
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  ],
+  "pagination": {
+    "total_records": 50,
+    "total_pages": 2,
+    "current_page_number": 1,
+    "page_size": 30
+  }
+}
+```
+
+## Error Responses
+
+| Status Code | Description                    | Example                                          |
+| ----------- | ------------------------------ | ------------------------------------------------ |
+| 401         | Invalid or missing API key     | `{"error": "Could not authenticate, invalid API Key"}` |

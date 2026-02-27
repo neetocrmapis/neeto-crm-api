@@ -1,0 +1,89 @@
+components:
+  schemas:
+    # Note object structure
+    note:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the note.
+        content:
+          type: string
+          description: Content of the note.
+        user_id:
+          type: string
+          description: Unique identifier of the user who created the note.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the note was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the note was last updated.
+
+    # Note create request
+    note_create_request:
+      type: object
+      required:
+        - note
+        - resource_type
+        - resource_id
+      properties:
+        note:
+          type: object
+          required:
+            - content
+          properties:
+            content:
+              type: string
+              description: Note content.
+              example: "Important note about this contact"
+        resource_type:
+          type: string
+          enum: [contacts, companies, deals, leads]
+          description: Type of resource to attach the note to.
+          example: "contacts"
+        resource_id:
+          type: integer
+          description: ID of the resource.
+          example: 1
+
+    # Note update request
+    note_update_request:
+      type: object
+      properties:
+        note:
+          type: object
+          properties:
+            content:
+              type: string
+              description: Updated note content.
+              example: "Updated note content"
+
+    # Note list response structure
+    note_list_response:
+      type: object
+      properties:
+        notes:
+          type: array
+          items:
+            $ref: "#/components/schemas/note"
+          description: List of notes.
+        pagination:
+          $ref: "../schemas/common.yaml#/components/schemas/pagination"
+
+    # Single note response
+    note_response:
+      type: object
+      properties:
+        note:
+          $ref: "#/components/schemas/note"
+
+    # Delete response
+    note_delete_response:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Note deleted successfully"

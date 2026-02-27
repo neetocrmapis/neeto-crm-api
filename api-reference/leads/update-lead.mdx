@@ -18,7 +18,7 @@ PATCH /api/external/v1/leads/:id
 | Parameter  | Type    | Description           |
 | ---------- | ------- | --------------------- |
 | name       | string  | Lead name             |
-| status     | string  | Lead status           |
+| status     | string  | Lead status (open, converted, archived) |
 | company_id | integer | Associated company ID |
 | contact_id | integer | Associated contact ID |
 | owner_id   | integer | Owner user ID         |
@@ -29,7 +29,7 @@ PATCH /api/external/v1/leads/:id
 {
   "lead": {
     "name": "John Smith",
-    "status": "qualified"
+    "status": "converted"
   }
 }
 ```
@@ -41,12 +41,29 @@ PATCH /api/external/v1/leads/:id
   "lead": {
     "id": "1",
     "name": "John Smith",
-    "status": "qualified",
+    "status": "converted",
+    "unique_number": "LED-001",
+    "email": "john@example.com",
+    "phone_number": "+1234567890",
+    "contact_name": "John Doe",
+    "contact_id": "1",
+    "company_name": "Acme Inc",
     "company_id": "1",
-    "owner_id": "1",
-    "organization_id": "1",
+    "owner": {
+      "id": "1",
+      "name": "Jane Smith"
+    },
+    "tags": [],
     "created_at": "2024-01-01T00:00:00Z",
     "updated_at": "2024-01-02T00:00:00Z"
   }
 }
 ```
+
+## Error Responses
+
+| Status Code | Description                    | Example                                          |
+| ----------- | ------------------------------ | ------------------------------------------------ |
+| 401         | Invalid or missing API key     | `{"error": "Could not authenticate, invalid API Key"}` |
+| 404         | Lead not found                 | `{"error": "Lead not found"}`                    |
+| 422         | Validation error               | `{"errors": ["Name can't be blank"]}`            |

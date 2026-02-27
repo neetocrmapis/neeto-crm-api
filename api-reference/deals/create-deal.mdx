@@ -20,7 +20,7 @@ POST /api/external/v1/deals
 | name        | string  | Yes      | Deal name                    |
 | value       | decimal | No       | Deal value                   |
 | currency    | string  | No       | Currency code (default: USD) |
-| status      | string  | No       | Deal status                  |
+| status      | string  | No       | Deal status (in_progress, won, lost) |
 | company_id  | integer | No       | Associated company ID        |
 | contact_id  | integer | No       | Associated contact ID        |
 | owner_id    | integer | No       | Owner user ID                |
@@ -64,3 +64,10 @@ POST /api/external/v1/deals
   }
 }
 ```
+
+## Error Responses
+
+| Status Code | Description                    | Example                                          |
+| ----------- | ------------------------------ | ------------------------------------------------ |
+| 401         | Invalid or missing API key     | `{"error": "Could not authenticate, invalid API Key"}` |
+| 422         | Validation error               | `{"errors": ["Name can't be blank"]}`            |

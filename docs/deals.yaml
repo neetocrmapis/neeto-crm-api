@@ -2,13 +2,16 @@ openapi: 3.0.3
 info:
   title: NeetoCRM Deals APIs
   version: 1.0.0
+  description: APIs for managing deals in your NeetoCRM workspace.
+  contact:
+    email: support@neetocrm.com
 
 servers:
   $ref: '../schemas/common.yaml#/servers'
 
 tags:
   - name: Deals
-    description: APIs to list deals in your workspace.
+    description: APIs to manage deals in your workspace.
 
 paths:
   /deals:
@@ -34,8 +37,170 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Could not authenticate, invalid API Key"
+                $ref: '../schemas/common.yaml#/components/schemas/error_response'
+              example:
+                error: "Could not authenticate, invalid API Key"
+    post:
+      summary: Create a deal
+      tags:
+        - Deals
+      description: Create a new deal in your workspace.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - $ref: '../schemas/common.yaml#/accept_header'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/deal.yaml#/components/schemas/deal_request'
+      responses:
+        '201':
+          description: Deal created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/deal.yaml#/components/schemas/deal_response'
+        '401':
+          description: Unauthorized - Invalid or missing API key.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/common.yaml#/components/schemas/error_response'
+              example:
+                error: "Could not authenticate, invalid API Key"
+        '422':
+          description: Validation error - Invalid or missing parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/common.yaml#/components/schemas/validation_error_response'
+              example:
+                errors: ["Name can't be blank"]
+
+  /deals/{id}:
+    get:
+      summary: Get a deal
+      tags:
+        - Deals
+      description: Retrieve a single deal by its ID.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - $ref: '../schemas/common.yaml#/accept_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the deal to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the deal.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/deal.yaml#/components/schemas/deal_response'
+        '401':
+          description: Unauthorized - Invalid or missing API key.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/common.yaml#/components/schemas/error_response'
+              example:
+                error: "Could not authenticate, invalid API Key"
+        '404':
+          description: Deal not found.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/common.yaml#/components/schemas/error_response'
+              example:
+                error: "Deal not found"
+    patch:
+      summary: Update a deal
+      tags:
+        - Deals
+      description: Update an existing deal by its ID.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - $ref: '../schemas/common.yaml#/accept_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the deal to update.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/deal.yaml#/components/schemas/deal_request'
+      responses:
+        '200':
+          description: Deal updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/deal.yaml#/components/schemas/deal_response'
+        '401':
+          description: Unauthorized - Invalid or missing API key.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/common.yaml#/components/schemas/error_response'
+              example:
+                error: "Could not authenticate, invalid API Key"
+        '404':
+          description: Deal not found.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/common.yaml#/components/schemas/error_response'
+              example:
+                error: "Deal not found"
+        '422':
+          description: Validation error - Invalid parameters.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/common.yaml#/components/schemas/validation_error_response'
+              example:
+                errors: ["Name can't be blank"]
+    delete:
+      summary: Delete a deal
+      tags:
+        - Deals
+      description: Delete a deal by its ID.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - $ref: '../schemas/common.yaml#/accept_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the deal to delete.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Deal deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/deal.yaml#/components/schemas/deal_delete_response'
+        '401':
+          description: Unauthorized - Invalid or missing API key.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/common.yaml#/components/schemas/error_response'
+              example:
+                error: "Could not authenticate, invalid API Key"
+        '404':
+          description: Deal not found.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/common.yaml#/components/schemas/error_response'
+              example:
+                error: "Deal not found"

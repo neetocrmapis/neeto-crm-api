@@ -77,3 +77,21 @@ components:
         page_size:
           type: integer
           description: Number of records per page.
+
+    # Common error response
+    error_response:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message describing what went wrong.
+
+    # Validation error response
+    validation_error_response:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+          description: List of validation error messages.

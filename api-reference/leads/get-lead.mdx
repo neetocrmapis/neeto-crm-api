@@ -20,23 +20,34 @@ GET /api/external/v1/leads/:id
   "lead": {
     "id": "1",
     "name": "John Doe",
-    "status": "new",
-    "company_id": "1",
+    "status": "open",
+    "unique_number": "LED-001",
+    "email": "john@example.com",
+    "phone_number": "+1234567890",
+    "contact_name": "John Doe",
     "contact_id": "1",
-    "owner_id": "1",
-    "organization_id": "1",
-    "created_at": "2024-01-01T00:00:00Z",
-    "updated_at": "2024-01-01T00:00:00Z",
-    "tag_ids": [1, 2],
-    "company": {
+    "company_name": "Acme Inc",
+    "company_id": "1",
+    "owner": {
       "id": "1",
-      "name": "Acme Inc"
+      "name": "Jane Smith"
     },
-    "contact": {
-      "id": "1",
-      "name": "John Doe",
-      "email": "john@example.com"
-    }
+    "tags": [
+      {
+        "id": "1",
+        "name": "hot",
+        "style": "red"
+      }
+    ],
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
   }
 }
 ```
+
+## Error Responses
+
+| Status Code | Description                    | Example                                          |
+| ----------- | ------------------------------ | ------------------------------------------------ |
+| 401         | Invalid or missing API key     | `{"error": "Could not authenticate, invalid API Key"}` |
+| 404         | Lead not found                 | `{"error": "Lead not found"}`                    |

@@ -103,6 +103,63 @@ components:
           format: date-time
           description: Timestamp when the deal was last updated.
 
+    # Deal create/update request
+    deal_request:
+      type: object
+      properties:
+        deal:
+          type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+              description: Deal name.
+              example: "Big Deal"
+            value:
+              type: number
+              description: Monetary value of the deal.
+              example: 10000
+            currency:
+              type: string
+              description: Currency code (default: USD).
+              example: "USD"
+            status:
+              type: string
+              enum: [in_progress, won, lost]
+              description: Deal status.
+              example: "in_progress"
+            company_id:
+              type: integer
+              description: Associated company ID.
+              example: 1
+            contact_id:
+              type: integer
+              description: Associated contact ID.
+              example: 1
+            owner_id:
+              type: integer
+              description: Owner user ID.
+              example: 1
+            stage_id:
+              type: integer
+              description: Stage ID.
+              example: 1
+            pipeline_id:
+              type: integer
+              description: Pipeline ID.
+              example: 1
+            position:
+              type: integer
+              description: Position in pipeline.
+              example: 1
+            tag_ids:
+              type: array
+              items:
+                type: integer
+              description: Array of tag IDs.
+              example: [1, 2]
+
     # Deal list response structure
     deal_list_response:
       type: object
@@ -114,3 +171,18 @@ components:
           description: List of deals.
         pagination:
           $ref: "../schemas/common.yaml#/components/schemas/pagination"
+
+    # Single deal response
+    deal_response:
+      type: object
+      properties:
+        deal:
+          $ref: "#/components/schemas/deal"
+
+    # Delete response
+    deal_delete_response:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Deal deleted successfully"

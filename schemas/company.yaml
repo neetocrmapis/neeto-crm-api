@@ -46,6 +46,30 @@ components:
           format: date-time
           description: Timestamp when the company was last updated.
 
+    # Company create/update request
+    company_request:
+      type: object
+      properties:
+        company:
+          type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+              description: Company name.
+              example: "Acme Inc"
+            address:
+              type: string
+              description: Company address.
+              example: "123 Main St, New York, NY"
+            tag_ids:
+              type: array
+              items:
+                type: integer
+              description: Array of tag IDs.
+              example: [1, 2]
+
     # Company list response structure
     company_list_response:
       type: object
@@ -57,3 +81,18 @@ components:
           description: List of companies.
         pagination:
           $ref: "../schemas/common.yaml#/components/schemas/pagination"
+
+    # Single company response
+    company_response:
+      type: object
+      properties:
+        company:
+          $ref: "#/components/schemas/company"
+
+    # Delete response
+    company_delete_response:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Company deleted successfully"

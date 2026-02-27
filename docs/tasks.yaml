@@ -1,8 +1,8 @@
 openapi: 3.0.3
 info:
-  title: NeetoCRM Leads APIs
+  title: NeetoCRM Tasks APIs
   version: 1.0.0
-  description: APIs for managing leads in your NeetoCRM workspace.
+  description: APIs for managing tasks in your NeetoCRM workspace.
   contact:
     email: support@neetocrm.com
 
@@ -10,16 +10,16 @@ servers:
   $ref: '../schemas/common.yaml#/servers'
 
 tags:
-  - name: Leads
-    description: APIs to manage leads in your workspace.
+  - name: Tasks
+    description: APIs to manage tasks in your workspace.
 
 paths:
-  /leads:
+  /tasks:
     get:
-      summary: List all leads
+      summary: List all tasks
       tags:
-        - Leads
-      description: Retrieve a paginated list of all leads in your workspace. Results are ordered by creation date (newest first).
+        - Tasks
+      description: Retrieve a paginated list of all tasks in your workspace. Results are ordered by creation date (newest first).
       parameters:
         - $ref: '../schemas/common.yaml#/api_key_header'
         - $ref: '../schemas/common.yaml#/accept_header'
@@ -27,11 +27,11 @@ paths:
         - $ref: '../schemas/common.yaml#/page_size_param'
       responses:
         '200':
-          description: Successfully retrieved leads.
+          description: Successfully retrieved tasks.
           content:
             application/json:
               schema:
-                $ref: '../schemas/lead.yaml#/components/schemas/lead_list_response'
+                $ref: '../schemas/task.yaml#/components/schemas/task_list_response'
         '401':
           description: Unauthorized - Invalid or missing API key.
           content:
@@ -41,10 +41,10 @@ paths:
               example:
                 error: "Could not authenticate, invalid API Key"
     post:
-      summary: Create a lead
+      summary: Create a task
       tags:
-        - Leads
-      description: Create a new lead in your workspace.
+        - Tasks
+      description: Create a new task in your workspace.
       parameters:
         - $ref: '../schemas/common.yaml#/api_key_header'
         - $ref: '../schemas/common.yaml#/accept_header'
@@ -53,14 +53,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '../schemas/lead.yaml#/components/schemas/lead_request'
+              $ref: '../schemas/task.yaml#/components/schemas/task_request'
       responses:
         '201':
-          description: Lead created successfully.
+          description: Task created successfully.
           content:
             application/json:
               schema:
-                $ref: '../schemas/lead.yaml#/components/schemas/lead_response'
+                $ref: '../schemas/task.yaml#/components/schemas/task_response'
         '401':
           description: Unauthorized - Invalid or missing API key.
           content:
@@ -76,30 +76,30 @@ paths:
               schema:
                 $ref: '../schemas/common.yaml#/components/schemas/validation_error_response'
               example:
-                errors: ["Name can't be blank"]
+                errors: ["Title can't be blank"]
 
-  /leads/{id}:
+  /tasks/{id}:
     get:
-      summary: Get a lead
+      summary: Get a task
       tags:
-        - Leads
-      description: Retrieve a single lead by its ID.
+        - Tasks
+      description: Retrieve a single task by its ID.
       parameters:
         - $ref: '../schemas/common.yaml#/api_key_header'
         - $ref: '../schemas/common.yaml#/accept_header'
         - name: id
           in: path
           required: true
-          description: The ID of the lead to retrieve.
+          description: The ID of the task to retrieve.
           schema:
             type: string
       responses:
         '200':
-          description: Successfully retrieved the lead.
+          description: Successfully retrieved the task.
           content:
             application/json:
               schema:
-                $ref: '../schemas/lead.yaml#/components/schemas/lead_response'
+                $ref: '../schemas/task.yaml#/components/schemas/task_response'
         '401':
           description: Unauthorized - Invalid or missing API key.
           content:
@@ -109,25 +109,25 @@ paths:
               example:
                 error: "Could not authenticate, invalid API Key"
         '404':
-          description: Lead not found.
+          description: Task not found.
           content:
             application/json:
               schema:
                 $ref: '../schemas/common.yaml#/components/schemas/error_response'
               example:
-                error: "Lead not found"
+                error: "Task not found"
     patch:
-      summary: Update a lead
+      summary: Update a task
       tags:
-        - Leads
-      description: Update an existing lead by its ID.
+        - Tasks
+      description: Update an existing task by its ID.
       parameters:
         - $ref: '../schemas/common.yaml#/api_key_header'
         - $ref: '../schemas/common.yaml#/accept_header'
         - name: id
           in: path
           required: true
-          description: The ID of the lead to update.
+          description: The ID of the task to update.
           schema:
             type: string
       requestBody:
@@ -135,14 +135,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '../schemas/lead.yaml#/components/schemas/lead_request'
+              $ref: '../schemas/task.yaml#/components/schemas/task_request'
       responses:
         '200':
-          description: Lead updated successfully.
+          description: Task updated successfully.
           content:
             application/json:
               schema:
-                $ref: '../schemas/lead.yaml#/components/schemas/lead_response'
+                $ref: '../schemas/task.yaml#/components/schemas/task_response'
         '401':
           description: Unauthorized - Invalid or missing API key.
           content:
@@ -152,13 +152,13 @@ paths:
               example:
                 error: "Could not authenticate, invalid API Key"
         '404':
-          description: Lead not found.
+          description: Task not found.
           content:
             application/json:
               schema:
                 $ref: '../schemas/common.yaml#/components/schemas/error_response'
               example:
-                error: "Lead not found"
+                error: "Task not found"
         '422':
           description: Validation error - Invalid parameters.
           content:
@@ -166,28 +166,28 @@ paths:
               schema:
                 $ref: '../schemas/common.yaml#/components/schemas/validation_error_response'
               example:
-                errors: ["Name can't be blank"]
+                errors: ["Title can't be blank"]
     delete:
-      summary: Delete a lead
+      summary: Delete a task
       tags:
-        - Leads
-      description: Delete a lead by its ID.
+        - Tasks
+      description: Delete a task by its ID.
       parameters:
         - $ref: '../schemas/common.yaml#/api_key_header'
         - $ref: '../schemas/common.yaml#/accept_header'
         - name: id
           in: path
           required: true
-          description: The ID of the lead to delete.
+          description: The ID of the task to delete.
           schema:
             type: string
       responses:
         '200':
-          description: Lead deleted successfully.
+          description: Task deleted successfully.
           content:
             application/json:
               schema:
-                $ref: '../schemas/lead.yaml#/components/schemas/lead_delete_response'
+                $ref: '../schemas/task.yaml#/components/schemas/task_delete_response'
         '401':
           description: Unauthorized - Invalid or missing API key.
           content:
@@ -197,10 +197,10 @@ paths:
               example:
                 error: "Could not authenticate, invalid API Key"
         '404':
-          description: Lead not found.
+          description: Task not found.
           content:
             application/json:
               schema:
                 $ref: '../schemas/common.yaml#/components/schemas/error_response'
               example:
-                error: "Lead not found"
+                error: "Task not found"

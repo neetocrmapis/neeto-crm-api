@@ -20,3 +20,10 @@ DELETE /api/external/v1/companies/:id
   "message": "Company deleted successfully"
 }
 ```
+
+## Error Responses
+
+| Status Code | Description                    | Example                                          |
+| ----------- | ------------------------------ | ------------------------------------------------ |
+| 401         | Invalid or missing API key     | `{"error": "Could not authenticate, invalid API Key"}` |
+| 404         | Company not found              | `{"error": "Company not found"}`                 |

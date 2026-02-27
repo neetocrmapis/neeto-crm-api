@@ -1,8 +1,67 @@
 ---
-title: "List all leads"
-openapi: "/bundled/leads.yaml GET /leads"
+title: List Leads
+openapi: get /leads
 ---
 
-import SubdomainInfo from "/snippets/subdomain-info.mdx";
+# List Leads
 
-<SubdomainInfo />
+Retrieve a paginated list of leads in your CRM.
+
+## Request
+
+```bash
+GET /api/external/v1/leads
+```
+
+## Query Parameters
+
+| Parameter   | Type    | Description                    |
+| ----------- | ------- | ------------------------------ |
+| page_number | integer | Page number (default: 1)       |
+| page_size   | integer | Records per page (default: 30) |
+
+## Response
+
+```json
+{
+  "leads": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "status": "open",
+      "unique_number": "LED-001",
+      "email": "john@example.com",
+      "phone_number": "+1234567890",
+      "contact_name": "John Doe",
+      "contact_id": "1",
+      "company_name": "Acme Inc",
+      "company_id": "1",
+      "owner": {
+        "id": "1",
+        "name": "Jane Smith"
+      },
+      "tags": [
+        {
+          "id": "1",
+          "name": "hot",
+          "style": "red"
+        }
+      ],
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  ],
+  "pagination": {
+    "total_records": 150,
+    "total_pages": 6,
+    "current_page_number": 1,
+    "page_size": 30
+  }
+}
+```
+
+## Error Responses
+
+| Status Code | Description                    | Example                                          |
+| ----------- | ------------------------------ | ------------------------------------------------ |
+| 401         | Invalid or missing API key     | `{"error": "Could not authenticate, invalid API Key"}` |

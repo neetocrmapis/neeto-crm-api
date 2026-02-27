@@ -1,0 +1,155 @@
+components:
+  schemas:
+    # Contact object structure
+    contact:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the contact.
+        name:
+          type: string
+          description: Name of the contact.
+        email:
+          type: string
+          nullable: true
+          description: Email address of the contact.
+        phone_number:
+          type: string
+          nullable: true
+          description: Phone number of the contact.
+        company_id:
+          type: string
+          nullable: true
+          description: Unique identifier of the associated company.
+        organization_id:
+          type: string
+          description: Unique identifier of the organization.
+        tag_ids:
+          type: array
+          items:
+            type: integer
+          description: IDs of tags associated with the contact.
+        owner:
+          type: object
+          nullable: true
+          description: Owner of the contact.
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the owner.
+            name:
+              type: string
+              description: Name of the owner.
+            email:
+              type: string
+              description: Email of the owner.
+        company:
+          type: object
+          nullable: true
+          description: Associated company.
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the company.
+            name:
+              type: string
+              description: Name of the company.
+        field_values:
+          type: array
+          description: Custom field values associated with the contact.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Unique identifier of the field value.
+              field_id:
+                type: string
+                description: Unique identifier of the custom field.
+              value:
+                type: string
+                description: Value of the custom field.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the contact was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the contact was last updated.
+
+    # Contact create/update request
+    contact_request:
+      type: object
+      properties:
+        contact:
+          type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+              description: Contact name.
+              example: "John Doe"
+            email:
+              type: string
+              description: Email address.
+              example: "john@example.com"
+            phone_number:
+              type: string
+              description: Phone number.
+              example: "+1234567890"
+            company_id:
+              type: integer
+              description: Associated company ID.
+              example: 1
+            owner_id:
+              type: integer
+              description: Owner user ID.
+              example: 1
+            tag_ids:
+              type: array
+              items:
+                type: integer
+              description: Array of tag IDs.
+              example: [1, 2]
+            field_values_attributes:
+              type: array
+              description: Custom field values.
+              items:
+                type: object
+                properties:
+                  field_id:
+                    type: integer
+                    description: ID of the custom field.
+                  value:
+                    type: string
+                    description: Value for the custom field.
+
+    # Contact list response structure
+    contact_list_response:
+      type: object
+      properties:
+        contacts:
+          type: array
+          items:
+            $ref: "#/components/schemas/contact"
+          description: List of contacts.
+        pagination:
+          $ref: "../schemas/common.yaml#/components/schemas/pagination"
+
+    # Single contact response
+    contact_response:
+      type: object
+      properties:
+        contact:
+          $ref: "#/components/schemas/contact"
+
+    # Delete response
+    contact_delete_response:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Contact deleted successfully"

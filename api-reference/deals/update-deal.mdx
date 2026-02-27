@@ -15,17 +15,17 @@ PATCH /api/external/v1/deals/:id
 
 ## Request Body
 
-| Parameter  | Type    | Description           |
-| ---------- | ------- | --------------------- |
-| name       | string  | Deal name             |
-| value      | decimal | Deal value            |
-| currency   | string  | Currency code         |
-| status     | string  | Deal status           |
-| company_id | integer | Associated company ID |
-| contact_id | integer | Associated contact ID |
-| owner_id   | integer | Owner user ID         |
-| stage_id   | integer | Stage ID              |
-| position   | integer | Position in pipeline  |
+| Parameter  | Type    | Description                          |
+| ---------- | ------- | ------------------------------------ |
+| name       | string  | Deal name                            |
+| value      | decimal | Deal value                           |
+| currency   | string  | Currency code                        |
+| status     | string  | Deal status (in_progress, won, lost) |
+| company_id | integer | Associated company ID                |
+| contact_id | integer | Associated contact ID                |
+| owner_id   | integer | Owner user ID                        |
+| stage_id   | integer | Stage ID                             |
+| position   | integer | Position in pipeline                 |
 
 ## Example
 
@@ -55,3 +55,11 @@ PATCH /api/external/v1/deals/:id
   }
 }
 ```
+
+## Error Responses
+
+| Status Code | Description                    | Example                                          |
+| ----------- | ------------------------------ | ------------------------------------------------ |
+| 401         | Invalid or missing API key     | `{"error": "Could not authenticate, invalid API Key"}` |
+| 404         | Deal not found                 | `{"error": "Deal not found"}`                    |
+| 422         | Validation error               | `{"errors": ["Name can't be blank"]}`            |
