@@ -45,14 +45,6 @@ paths:
             application/json:
               schema:
                 $ref: '../schemas/note.yaml#/components/schemas/note_list_response'
-        '401':
-          description: Unauthorized - Invalid or missing API key.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/error_response'
-              example:
-                error: "Could not authenticate, invalid API Key"
     post:
       summary: Create a note
       tags:
@@ -74,22 +66,6 @@ paths:
             application/json:
               schema:
                 $ref: '../schemas/note.yaml#/components/schemas/note_response'
-        '401':
-          description: Unauthorized - Invalid or missing API key.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/error_response'
-              example:
-                error: "Could not authenticate, invalid API Key"
-        '422':
-          description: Validation error - Invalid or missing parameters.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/validation_error_response'
-              example:
-                errors: ["Content can't be blank"]
 
   /notes/{id}:
     patch:
@@ -119,30 +95,6 @@ paths:
             application/json:
               schema:
                 $ref: '../schemas/note.yaml#/components/schemas/note_response'
-        '401':
-          description: Unauthorized - Invalid or missing API key.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/error_response'
-              example:
-                error: "Could not authenticate, invalid API Key"
-        '404':
-          description: Note not found.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/error_response'
-              example:
-                error: "Note not found"
-        '422':
-          description: Validation error - Invalid parameters.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/validation_error_response'
-              example:
-                errors: ["Content can't be blank"]
     delete:
       summary: Delete a note
       tags:
@@ -163,20 +115,4 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../schemas/note.yaml#/components/schemas/note_delete_response'
-        '401':
-          description: Unauthorized - Invalid or missing API key.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/error_response'
-              example:
-                error: "Could not authenticate, invalid API Key"
-        '404':
-          description: Note not found.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/error_response'
-              example:
-                error: "Note not found"
+                $ref: '../schemas/note.yaml#/components/schemas/note_response'

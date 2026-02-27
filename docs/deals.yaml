@@ -32,14 +32,6 @@ paths:
             application/json:
               schema:
                 $ref: '../schemas/deal.yaml#/components/schemas/deal_list_response'
-        '401':
-          description: Unauthorized - Invalid or missing API key.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/error_response'
-              example:
-                error: "Could not authenticate, invalid API Key"
     post:
       summary: Create a deal
       tags:
@@ -61,22 +53,6 @@ paths:
             application/json:
               schema:
                 $ref: '../schemas/deal.yaml#/components/schemas/deal_response'
-        '401':
-          description: Unauthorized - Invalid or missing API key.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/error_response'
-              example:
-                error: "Could not authenticate, invalid API Key"
-        '422':
-          description: Validation error - Invalid or missing parameters.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/validation_error_response'
-              example:
-                errors: ["Name can't be blank"]
 
   /deals/{id}:
     get:
@@ -100,22 +76,6 @@ paths:
             application/json:
               schema:
                 $ref: '../schemas/deal.yaml#/components/schemas/deal_response'
-        '401':
-          description: Unauthorized - Invalid or missing API key.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/error_response'
-              example:
-                error: "Could not authenticate, invalid API Key"
-        '404':
-          description: Deal not found.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/error_response'
-              example:
-                error: "Deal not found"
     patch:
       summary: Update a deal
       tags:
@@ -143,30 +103,6 @@ paths:
             application/json:
               schema:
                 $ref: '../schemas/deal.yaml#/components/schemas/deal_response'
-        '401':
-          description: Unauthorized - Invalid or missing API key.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/error_response'
-              example:
-                error: "Could not authenticate, invalid API Key"
-        '404':
-          description: Deal not found.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/error_response'
-              example:
-                error: "Deal not found"
-        '422':
-          description: Validation error - Invalid parameters.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/validation_error_response'
-              example:
-                errors: ["Name can't be blank"]
     delete:
       summary: Delete a deal
       tags:
@@ -188,19 +124,3 @@ paths:
             application/json:
               schema:
                 $ref: '../schemas/deal.yaml#/components/schemas/deal_delete_response'
-        '401':
-          description: Unauthorized - Invalid or missing API key.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/error_response'
-              example:
-                error: "Could not authenticate, invalid API Key"
-        '404':
-          description: Deal not found.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/error_response'
-              example:
-                error: "Deal not found"

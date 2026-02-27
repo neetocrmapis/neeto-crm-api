@@ -32,14 +32,6 @@ paths:
             application/json:
               schema:
                 $ref: '../schemas/task.yaml#/components/schemas/task_list_response'
-        '401':
-          description: Unauthorized - Invalid or missing API key.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/error_response'
-              example:
-                error: "Could not authenticate, invalid API Key"
     post:
       summary: Create a task
       tags:
@@ -61,22 +53,6 @@ paths:
             application/json:
               schema:
                 $ref: '../schemas/task.yaml#/components/schemas/task_response'
-        '401':
-          description: Unauthorized - Invalid or missing API key.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/error_response'
-              example:
-                error: "Could not authenticate, invalid API Key"
-        '422':
-          description: Validation error - Invalid or missing parameters.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/validation_error_response'
-              example:
-                errors: ["Title can't be blank"]
 
   /tasks/{id}:
     get:
@@ -100,22 +76,6 @@ paths:
             application/json:
               schema:
                 $ref: '../schemas/task.yaml#/components/schemas/task_response'
-        '401':
-          description: Unauthorized - Invalid or missing API key.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/error_response'
-              example:
-                error: "Could not authenticate, invalid API Key"
-        '404':
-          description: Task not found.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/error_response'
-              example:
-                error: "Task not found"
     patch:
       summary: Update a task
       tags:
@@ -143,30 +103,6 @@ paths:
             application/json:
               schema:
                 $ref: '../schemas/task.yaml#/components/schemas/task_response'
-        '401':
-          description: Unauthorized - Invalid or missing API key.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/error_response'
-              example:
-                error: "Could not authenticate, invalid API Key"
-        '404':
-          description: Task not found.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/error_response'
-              example:
-                error: "Task not found"
-        '422':
-          description: Validation error - Invalid parameters.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/validation_error_response'
-              example:
-                errors: ["Title can't be blank"]
     delete:
       summary: Delete a task
       tags:
@@ -188,19 +124,3 @@ paths:
             application/json:
               schema:
                 $ref: '../schemas/task.yaml#/components/schemas/task_delete_response'
-        '401':
-          description: Unauthorized - Invalid or missing API key.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/error_response'
-              example:
-                error: "Could not authenticate, invalid API Key"
-        '404':
-          description: Task not found.
-          content:
-            application/json:
-              schema:
-                $ref: '../schemas/common.yaml#/components/schemas/error_response'
-              example:
-                error: "Task not found"
