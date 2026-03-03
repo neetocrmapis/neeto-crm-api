@@ -1,31 +1,64 @@
-# Identifying Your Subdomain
+---
+title: "Identifying your subdomain"
+description: "Learn how to identify your workspace subdomain for API requests."
+---
 
-Your NeetoCRM workspace is identified by a unique subdomain. This subdomain is used in the API base URL.
+## What is a subdomain?
 
-## Finding Your Subdomain
-
-Your subdomain is the part of the URL you use to access your NeetoCRM workspace:
-
-```
-https://your-workspace.neetocrm.com
-```
-
-In this example, `your-workspace` is your subdomain.
-
-## API Base URL
-
-All API requests should be made to:
+A subdomain is the part of your workspace URL that comes before the main domain. For example, in the URL:
 
 ```
-https://your-workspace.neetocrm.com/api/external/v1
+https://spinkart.neetocrm.com
 ```
 
-Replace `your-workspace` with your actual workspace subdomain.
+The subdomain is: **spinkart**
 
-## Example
+This subdomain is crucial for making API requests, as it identifies your specific workspace within NeetoCRM.
 
-If your workspace is at `acme.neetocrm.com`, your API requests would go to:
+## Step-by-step instructions
+<Steps>
+  <Step title="Locate your workspace URL">
+    You can usually find this in your browser's address bar when logged into your workspace.
+
+    Example:
+    ```
+    https://your-subdomain.neetocrm.com
+    ```
+  </Step>
+
+  <Step title="Identify the main domain">
+    Our main domain is: `neetocrm.com`
+  </Step>
+
+  <Step title="Extract the part before the main domain">
+    Everything before `neetocrm.com` is your subdomain.
+
+    **Example:**
+    - URL: `https://marketing.neetocrm.com`
+    - Subdomain: `marketing`
+  </Step>
+</Steps>
+
+## Using Your Subdomain in API Requests
+
+Once you've identified your subdomain, you'll use it in all API requests. The base URL format is:
 
 ```
-https://acme.neetocrm.com/api/external/v1
+https://{your-subdomain}.neetocrm.com/api/external/v1
 ```
+
+For example, if your subdomain is `mycompany`, your API base URL would be:
+
+```
+https://mycompany.neetocrm.com/api/external/v1
+```
+
+## Common Examples
+
+Here are some common subdomain patterns:
+
+| Type       | Example URL                           | Subdomain        |
+| ---------- | ------------------------------------- | ---------------- |
+| Company    | `https://acmecorp.neetocrm.com`       | `acmecorp`       |
+| Department | `https://marketing.neetocrm.com`      | `marketing`      |
+| Project    | `https://product-launch.neetocrm.com` | `product-launch` |

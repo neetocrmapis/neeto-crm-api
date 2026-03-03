@@ -1,45 +1,8 @@
 ---
-title: List Notes
+title: "List all notes"
 openapi: "/bundled/notes.yaml GET /notes"
 ---
 
-# List Notes
+import SubdomainInfo from "/snippets/subdomain-info.mdx";
 
-Retrieve notes for a specific resource.
-
-## Request
-
-```bash
-GET /api/external/v1/notes?resource_type=contacts&resource_id=1
-```
-
-## Query Parameters
-
-| Parameter     | Type    | Required | Description                                          |
-| ------------- | ------- | -------- | ---------------------------------------------------- |
-| resource_type | string  | Yes      | Type of resource (contacts, companies, deals, leads) |
-| resource_id   | integer | Yes      | ID of the resource                                   |
-| page_number   | integer | No       | Page number (default: 1)                             |
-| page_size     | integer | No       | Records per page (default: 30)                       |
-
-## Response
-
-```json
-{
-  "notes": [
-    {
-      "id": "1",
-      "content": "Important note about this contact",
-      "user_id": "1",
-      "created_at": "2024-01-01T00:00:00Z",
-      "updated_at": "2024-01-01T00:00:00Z"
-    }
-  ],
-  "pagination": {
-    "total_records": 10,
-    "total_pages": 1,
-    "current_page_number": 1,
-    "page_size": 30
-  }
-}
-```
+<SubdomainInfo />

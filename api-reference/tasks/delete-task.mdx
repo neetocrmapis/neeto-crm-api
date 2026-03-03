@@ -1,22 +1,8 @@
 ---
-title: Delete Task
+title: "Delete a task"
 openapi: "/bundled/tasks.yaml DELETE /tasks/{id}"
 ---
 
-# Delete Task
+import SubdomainInfo from "/snippets/subdomain-info.mdx";
 
-Delete a task from your CRM.
-
-## Request
-
-```bash
-DELETE /api/external/v1/tasks/:id
-```
-
-## Response
-
-```json
-{
-  "message": "Task deleted successfully"
-}
-```
+<SubdomainInfo />
