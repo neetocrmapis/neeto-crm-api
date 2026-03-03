@@ -107,17 +107,17 @@ components:
               description: Due time.
               example: "14:00"
             owner_id:
-              type: integer
-              description: Owner user ID.
-              example: 1
+              type: string
+              description: Unique identifier of the owner.
+              example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
             contact_id:
               type: integer
               description: Associated contact ID.
               example: 1
             company_id:
-              type: integer
-              description: Associated company ID.
-              example: 1
+              type: string
+              description: Unique identifier of the associated company.
+              example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
             deal_id:
               type: integer
               description: Associated deal ID.

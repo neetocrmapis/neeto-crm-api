@@ -28,7 +28,7 @@ components:
         tag_ids:
           type: array
           items:
-            type: integer
+            type: string
           description: IDs of tags associated with the contact.
         owner:
           type: object
@@ -101,19 +101,19 @@ components:
               description: Phone number.
               example: "+1234567890"
             company_id:
-              type: integer
-              description: Associated company ID.
-              example: 1
+              type: string
+              description: Unique identifier of the associated company.
+              example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
             owner_id:
-              type: integer
-              description: Owner user ID.
-              example: 1
+              type: string
+              description: Unique identifier of the owner.
+              example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
             tag_ids:
               type: array
               items:
-                type: integer
+                type: string
               description: Array of tag IDs.
-              example: [1, 2]
+              example: ["a1b2c3d4-e5f6-7890-abcd-ef1234567890", "b2c3d4e5-f6a7-8901-bcde-f12345678901"]
             field_values_attributes:
               type: array
               description: Custom field values.
@@ -121,8 +121,8 @@ components:
                 type: object
                 properties:
                   field_id:
-                    type: integer
-                    description: ID of the custom field.
+                    type: string
+                    description: Unique identifier of the custom field.
                   value:
                     type: string
                     description: Value for the custom field.

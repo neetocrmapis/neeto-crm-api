@@ -66,9 +66,9 @@ components:
             tag_ids:
               type: array
               items:
-                type: integer
+                type: string
               description: Array of tag IDs.
-              example: [1, 2]
+              example: ["a1b2c3d4-e5f6-7890-abcd-ef1234567890", "b2c3d4e5-f6a7-8901-bcde-f12345678901"]
 
     # Company list response structure
     company_list_response:
