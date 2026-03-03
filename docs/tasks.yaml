@@ -66,7 +66,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: The ID of the task to retrieve.
+          description: The ID of the task to retrieve. You can get the task `id` by listing all tasks using our [List all tasks](/api-reference/tasks/list-tasks) API.
           schema:
             type: string
       responses:
@@ -87,7 +87,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: The ID of the task to update.
+          description: The ID of the task to update. You can get the task `id` by listing all tasks using our [List all tasks](/api-reference/tasks/list-tasks) API.
           schema:
             type: string
       requestBody:
@@ -114,7 +114,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: The ID of the task to delete.
+          description: The ID of the task to delete. You can get the task `id` by listing all tasks using our [List all tasks](/api-reference/tasks/list-tasks) API.
           schema:
             type: string
       responses:

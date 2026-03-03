@@ -79,7 +79,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: The ID of the note to update.
+          description: The ID of the note to update. You can get the note `id` by listing notes for a resource using our [List notes](/api-reference/notes/list-notes) API.
           schema:
             type: string
       requestBody:
@@ -106,7 +106,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: The ID of the note to delete.
+          description: The ID of the note to delete. You can get the note `id` by listing notes for a resource using our [List notes](/api-reference/notes/list-notes) API.
           schema:
             type: string
       responses:
