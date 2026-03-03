@@ -50,73 +50,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/company_response'
-  /companies/{id}:
-    get:
-      summary: Get a company
-      tags:
-        - Companies
-      description: Retrieve a single company by its ID.
-      parameters:
-        - $ref: '#/components/parameters/api_key_header'
-        - name: id
-          in: path
-          required: true
-          description: The ID of the company to retrieve. You can get the company `id` by listing all companies using our [List all companies](/api-reference/companies/list-companies) API.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successfully retrieved the company.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/company_response'
-    patch:
-      summary: Update a company
-      tags:
-        - Companies
-      description: Update an existing company by its ID.
-      parameters:
-        - $ref: '#/components/parameters/api_key_header'
-        - name: id
-          in: path
-          required: true
-          description: The ID of the company to update. You can get the company `id` by listing all companies using our [List all companies](/api-reference/companies/list-companies) API.
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/company_request'
-      responses:
-        '200':
-          description: Company updated successfully.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/company_response'
-    delete:
-      summary: Delete a company
-      tags:
-        - Companies
-      description: Delete a company by its ID.
-      parameters:
-        - $ref: '#/components/parameters/api_key_header'
-        - name: id
-          in: path
-          required: true
-          description: The ID of the company to delete. You can get the company `id` by listing all companies using our [List all companies](/api-reference/companies/list-companies) API.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Company deleted successfully.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/company_delete_response'
 components:
   parameters:
     api_key_header:
@@ -267,10 +200,3 @@ components:
           tags: []
           created_at: '2025-03-15T10:30:00.000Z'
           updated_at: '2025-03-15T10:30:00.000Z'
-    company_delete_response:
-      type: object
-      properties:
-        message:
-          type: string
-      example:
-        message: Company deleted successfully
