@@ -24,7 +24,6 @@ paths:
       description: Retrieve a list of all leads in your workspace. Results are ordered by creation date (newest first).
       parameters:
         - $ref: '#/components/parameters/api_key_header'
-        - $ref: '#/components/parameters/accept_header'
         - $ref: '#/components/parameters/page_number_param'
         - $ref: '#/components/parameters/page_size_param'
       responses:
@@ -41,7 +40,6 @@ paths:
       description: Create a new lead in your workspace.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
-        - $ref: '#/components/parameters/accept_header'
       requestBody:
         required: true
         content:
@@ -63,7 +61,6 @@ paths:
       description: Retrieve a single lead by its ID.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
-        - $ref: '#/components/parameters/accept_header'
         - name: id
           in: path
           required: true
@@ -84,7 +81,6 @@ paths:
       description: Update an existing lead by its ID.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
-        - $ref: '#/components/parameters/accept_header'
         - name: id
           in: path
           required: true
@@ -111,7 +107,6 @@ paths:
       description: Delete a lead by its ID.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
-        - $ref: '#/components/parameters/accept_header'
         - name: id
           in: path
           required: true
@@ -134,16 +129,6 @@ components:
       required: true
       schema:
         type: string
-    accept_header:
-      in: header
-      name: Accept
-      description: Specifies the expected response format. Must be set to `application/json` for proper API communication.
-      required: true
-      schema:
-        type: string
-        enum:
-          - application/json
-        default: application/json
     page_number_param:
       in: query
       name: page_number

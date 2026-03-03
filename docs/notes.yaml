@@ -22,7 +22,6 @@ paths:
       description: Retrieve a list of notes for a specific resource.
       parameters:
         - $ref: '../schemas/common.yaml#/api_key_header'
-        - $ref: '../schemas/common.yaml#/accept_header'
         - name: resource_type
           in: query
           required: true
@@ -52,7 +51,6 @@ paths:
       description: Create a new note for a specific resource.
       parameters:
         - $ref: '../schemas/common.yaml#/api_key_header'
-        - $ref: '../schemas/common.yaml#/accept_header'
       requestBody:
         required: true
         content:
@@ -75,7 +73,6 @@ paths:
       description: Update an existing note by its ID.
       parameters:
         - $ref: '../schemas/common.yaml#/api_key_header'
-        - $ref: '../schemas/common.yaml#/accept_header'
         - name: id
           in: path
           required: true
@@ -102,7 +99,6 @@ paths:
       description: Delete a note by its ID.
       parameters:
         - $ref: '../schemas/common.yaml#/api_key_header'
-        - $ref: '../schemas/common.yaml#/accept_header'
         - name: id
           in: path
           required: true

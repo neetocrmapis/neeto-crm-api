@@ -24,7 +24,6 @@ paths:
       description: Retrieve a list of notes for a specific resource.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
-        - $ref: '#/components/parameters/accept_header'
         - name: resource_type
           in: query
           required: true
@@ -58,7 +57,6 @@ paths:
       description: Create a new note for a specific resource.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
-        - $ref: '#/components/parameters/accept_header'
       requestBody:
         required: true
         content:
@@ -80,7 +78,6 @@ paths:
       description: Update an existing note by its ID.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
-        - $ref: '#/components/parameters/accept_header'
         - name: id
           in: path
           required: true
@@ -107,7 +104,6 @@ paths:
       description: Delete a note by its ID.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
-        - $ref: '#/components/parameters/accept_header'
         - name: id
           in: path
           required: true
@@ -130,16 +126,6 @@ components:
       required: true
       schema:
         type: string
-    accept_header:
-      in: header
-      name: Accept
-      description: Specifies the expected response format. Must be set to `application/json` for proper API communication.
-      required: true
-      schema:
-        type: string
-        enum:
-          - application/json
-        default: application/json
     page_number_param:
       in: query
       name: page_number

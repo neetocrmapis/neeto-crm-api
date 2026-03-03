@@ -22,7 +22,6 @@ paths:
       description: Retrieve a list of all companies in your workspace. Results are ordered by creation date (newest first).
       parameters:
         - $ref: '../schemas/common.yaml#/api_key_header'
-        - $ref: '../schemas/common.yaml#/accept_header'
         - $ref: '../schemas/common.yaml#/page_number_param'
         - $ref: '../schemas/common.yaml#/page_size_param'
       responses:
@@ -39,7 +38,6 @@ paths:
       description: Create a new company in your workspace.
       parameters:
         - $ref: '../schemas/common.yaml#/api_key_header'
-        - $ref: '../schemas/common.yaml#/accept_header'
       requestBody:
         required: true
         content:
@@ -62,7 +60,6 @@ paths:
       description: Retrieve a single company by its ID.
       parameters:
         - $ref: '../schemas/common.yaml#/api_key_header'
-        - $ref: '../schemas/common.yaml#/accept_header'
         - name: id
           in: path
           required: true
@@ -83,7 +80,6 @@ paths:
       description: Update an existing company by its ID.
       parameters:
         - $ref: '../schemas/common.yaml#/api_key_header'
-        - $ref: '../schemas/common.yaml#/accept_header'
         - name: id
           in: path
           required: true
@@ -110,7 +106,6 @@ paths:
       description: Delete a company by its ID.
       parameters:
         - $ref: '../schemas/common.yaml#/api_key_header'
-        - $ref: '../schemas/common.yaml#/accept_header'
         - name: id
           in: path
           required: true
