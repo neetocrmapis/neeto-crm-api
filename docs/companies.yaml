@@ -8,7 +8,7 @@ servers:
 
 tags:
   - name: Companies
-    description: APIs to list companies in your workspace.
+    description: APIs to manage companies in your workspace.
 
 paths:
   /companies:
@@ -16,10 +16,9 @@ paths:
       summary: List all companies
       tags:
         - Companies
-      description: Retrieve a paginated list of all companies in your workspace. Results are ordered by creation date (newest first).
+      description: Retrieve a list of all companies in your workspace. Results are ordered by creation date (newest first).
       parameters:
         - $ref: '../schemas/common.yaml#/api_key_header'
-        - $ref: '../schemas/common.yaml#/accept_header'
         - $ref: '../schemas/common.yaml#/page_number_param'
         - $ref: '../schemas/common.yaml#/page_size_param'
       responses:
@@ -29,13 +28,91 @@ paths:
             application/json:
               schema:
                 $ref: '../schemas/company.yaml#/components/schemas/company_list_response'
-        '401':
-          description: Unauthorized - Invalid or missing API key.
+    post:
+      summary: Create a company
+      tags:
+        - Companies
+      description: Create a new company in your workspace.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/company.yaml#/components/schemas/company_request'
+      responses:
+        '201':
+          description: Company created successfully.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Could not authenticate, invalid API Key"
+                $ref: '../schemas/company.yaml#/components/schemas/company_response'
+
+  /companies/{id}:
+    get:
+      summary: Get a company
+      tags:
+        - Companies
+      description: Retrieve a single company by its ID.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the company to retrieve. You can get the company `id` by listing all companies using our [List all companies](/api-reference/companies/list-companies) API.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the company.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/company.yaml#/components/schemas/company_response'
+    patch:
+      summary: Update a company
+      tags:
+        - Companies
+      description: Update an existing company by its ID.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the company to update. You can get the company `id` by listing all companies using our [List all companies](/api-reference/companies/list-companies) API.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/company.yaml#/components/schemas/company_request'
+      responses:
+        '200':
+          description: Company updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/company.yaml#/components/schemas/company_response'
+    delete:
+      summary: Delete a company
+      tags:
+        - Companies
+      description: Delete a company by its ID.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the company to delete. You can get the company `id` by listing all companies using our [List all companies](/api-reference/companies/list-companies) API.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Company deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/company.yaml#/components/schemas/company_delete_response'

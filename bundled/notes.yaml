@@ -1,0 +1,253 @@
+openapi: 3.0.3
+info:
+  title: NeetoCRM Notes APIs
+  version: 1.0.0
+servers:
+  - description: NeetoCRM APIs
+    url: https://{your-subdomain}.neetocrm.com/api/external/v1
+    variables:
+      your-subdomain:
+        default: spinkart
+        description: Replace **spinkart** with your [workspace's subdomain](/getting-started/identifying-subdomain).
+tags:
+  - name: Notes
+    description: APIs to manage notes in your workspace.
+paths:
+  /notes:
+    get:
+      summary: List notes
+      tags:
+        - Notes
+      description: Retrieve a list of notes for a specific resource.
+      parameters:
+        - $ref: '#/components/parameters/api_key_header'
+        - name: resource_type
+          in: query
+          required: true
+          description: Type of resource (contacts, companies, deals, leads).
+          schema:
+            type: string
+            enum:
+              - contacts
+              - companies
+              - deals
+              - leads
+        - name: resource_id
+          in: query
+          required: true
+          description: ID of the resource.
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/page_number_param'
+        - $ref: '#/components/parameters/page_size_param'
+      responses:
+        '200':
+          description: Successfully retrieved notes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/note_list_response'
+    post:
+      summary: Create a note
+      tags:
+        - Notes
+      description: Create a new note for a specific resource.
+      parameters:
+        - $ref: '#/components/parameters/api_key_header'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/note_create_request'
+      responses:
+        '201':
+          description: Note created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/note_response'
+  /notes/{id}:
+    patch:
+      summary: Update a note
+      tags:
+        - Notes
+      description: Update an existing note by its ID.
+      parameters:
+        - $ref: '#/components/parameters/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the note to update. You can get the note `id` by listing notes for a resource using our [List notes](/api-reference/notes/list-notes) API.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/note_update_request'
+      responses:
+        '200':
+          description: Note updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/note_response'
+    delete:
+      summary: Delete a note
+      tags:
+        - Notes
+      description: Delete a note by its ID.
+      parameters:
+        - $ref: '#/components/parameters/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the note to delete. You can get the note `id` by listing notes for a resource using our [List notes](/api-reference/notes/list-notes) API.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Note deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/note_response'
+components:
+  parameters:
+    api_key_header:
+      in: header
+      name: X-Api-Key
+      description: X-Api-Key is used to authenticate requests using an API key. Provide your API key in this header to access protected endpoints. Refer to [Authentication](/getting-started/authentication) for more information.
+      required: true
+      schema:
+        type: string
+    page_number_param:
+      in: query
+      name: page_number
+      description: Retrieve paginated results by specifying the desired page number. If this parameter is absent, all results will be returned.
+      required: false
+      schema:
+        type: integer
+    page_size_param:
+      in: query
+      name: page_size
+      description: Set the number of results returned in the response. Defaulting to 30 when omitted.
+      required: false
+      schema:
+        type: integer
+  schemas:
+    note:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the note.
+        content:
+          type: string
+          description: Content of the note.
+        user_id:
+          type: string
+          description: Unique identifier of the user who created the note.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the note was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the note was last updated.
+    pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+          description: Total number of records.
+        total_pages:
+          type: integer
+          description: Total number of pages available.
+        current_page_number:
+          type: integer
+          description: Current page number.
+        page_size:
+          type: integer
+          description: Number of records per page.
+    note_list_response:
+      type: object
+      properties:
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/note'
+          description: List of notes.
+        pagination:
+          $ref: '#/components/schemas/pagination'
+      example:
+        notes:
+          - id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+            content: Important note about Eve
+            user_id: u1b2c3d4-e5f6-7890-abcd-ef1234567890
+            created_at: '2025-03-15T10:30:00.000Z'
+            updated_at: '2025-03-15T10:30:00.000Z'
+          - id: b2c3d4e5-f6a7-8901-bcde-f12345678901
+            content: Follow-up call with Oliver scheduled
+            user_id: u1b2c3d4-e5f6-7890-abcd-ef1234567890
+            created_at: '2025-03-14T14:22:00.000Z'
+            updated_at: '2025-03-14T14:22:00.000Z'
+        pagination:
+          total_records: 42
+          total_pages: 2
+          current_page_number: 1
+          page_size: 30
+    note_create_request:
+      type: object
+      required:
+        - note
+        - resource_type
+        - resource_id
+      properties:
+        note:
+          type: object
+          required:
+            - content
+          properties:
+            content:
+              type: string
+              description: Note content.
+              example: Important note about Eve
+        resource_type:
+          type: string
+          enum:
+            - contacts
+            - companies
+            - deals
+            - leads
+          description: Type of resource to attach the note to.
+          example: contacts
+        resource_id:
+          type: integer
+          description: ID of the resource.
+          example: 1
+    note_response:
+      type: object
+      properties:
+        note:
+          $ref: '#/components/schemas/note'
+      example:
+        note:
+          id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          content: Important note about Eve
+          user_id: u1b2c3d4-e5f6-7890-abcd-ef1234567890
+          created_at: '2025-03-15T10:30:00.000Z'
+          updated_at: '2025-03-15T10:30:00.000Z'
+    note_update_request:
+      type: object
+      properties:
+        note:
+          type: object
+          properties:
+            content:
+              type: string
+              description: Updated note content.
+              example: Updated note about Oliver

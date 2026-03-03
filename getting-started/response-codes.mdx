@@ -1,31 +1,87 @@
-# Response Codes
+---
+title: "HTTP response codes"
+description: "Understand the HTTP status codes returned by the NeetoCRM API."
+---
 
-The NeetoCRM API uses standard HTTP response codes to indicate the success or failure of an API request.
+## Success Codes
 
-## HTTP Status Codes
+<ResponseField name='200 OK'>
+  The request was successful and the server returned the requested data.
+</ResponseField>
 
-| Code | Name                  | Description                             |
-| ---- | --------------------- | --------------------------------------- |
-| 200  | OK                    | Request succeeded                       |
-| 201  | Created               | Resource was successfully created       |
-| 204  | No Content            | Request succeeded, no content to return |
-| 400  | Bad Request           | Invalid request format                  |
-| 401  | Unauthorized          | Invalid or missing API key              |
-| 404  | Not Found             | Resource not found                      |
-| 422  | Unprocessable Entity  | Validation error                        |
-| 429  | Too Many Requests     | Rate limit exceeded                     |
-| 500  | Internal Server Error | Something went wrong on our end         |
+<ResponseField name='201 Created'>
+  The resource was successfully created.
+</ResponseField>
+
+<ResponseField name='204 No Content'>
+  The request succeeded with no response body.
+</ResponseField>
+
+## Client error codes
+
+<ResponseField name='400 Bad Request'>
+  There was an issue with the request. This usually indicates malformed JSON,
+  missing required parameters, or invalid parameter values.
+</ResponseField>
+
+<ResponseField name='401 Unauthorized'>
+  The request needs to be authenticated. This typically means:
+  - Missing API key.
+  - Invalid API key.
+  - Expired API key.
+</ResponseField>
+
+<ResponseField name='403 Forbidden'>
+  An operation was not allowed. This could mean:
+  - Insufficient permissions for the requested action.
+  - Attempting to access a resource you don't own.
+  - API key doesn't have the required scope.
+</ResponseField>
+
+<ResponseField name='404 Not Found'>
+  The requested URL or resource was not found. This could indicate:
+  - Incorrect endpoint URL.
+  - Resource ID doesn't exist.
+  - Workspace subdomain is incorrect.
+</ResponseField>
+
+<ResponseField name='422 Unprocessable entity'>
+  The given request could not be processed by the server due to malformed
+  request. Check the request body once again.
+</ResponseField>
+
+<ResponseField name='429 Too Many Requests'>
+  Rate limit exceeded. Try again after some time or implement exponential backoff for retries.
+</ResponseField>
+
+## Server Error Codes
+
+<ResponseField name='500 Internal Server Error'>
+  An unexpected error occurred on the server. If this persists, please contact
+  support.
+</ResponseField>
+
+<ResponseField name='501 Not Implemented'>
+  The server does not support the functionality required to fulfill the request.
+</ResponseField>
 
 ## Error Response Format
 
-When an error occurs, the API returns an error object:
+When an error occurs, the API returns a JSON response with error details:
 
-```json
+```json Error Response Example
 {
   "error": "Error message describing what went wrong"
 }
 ```
 
-## Rate Limiting
+<ResponseField name='error' type='string'>
+  A human-readable error message.
+</ResponseField>
 
-API requests are rate limited to ensure fair usage. If you exceed the rate limit, you'll receive a 429 response. Consider implementing exponential backoff for retries.
+<Tip>
+  When debugging API issues, the [HTTP status
+  code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) often provides
+  the first clue about what went wrong. Start by checking the status code before
+  diving into the response body.
+</Tip>

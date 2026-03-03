@@ -1,22 +1,8 @@
 ---
-title: Delete Contact
-openapi: delete /contacts/{id}
+title: "Delete a contact"
+openapi: "/bundled/contacts.yaml DELETE /contacts/{id}"
 ---
 
-# Delete Contact
+import SubdomainInfo from "/snippets/subdomain-info.mdx";
 
-Delete a contact from your CRM.
-
-## Request
-
-```bash
-DELETE /api/external/v1/contacts/:id
-```
-
-## Response
-
-```json
-{
-  "message": "Contact deleted successfully"
-}
-```
+<SubdomainInfo />

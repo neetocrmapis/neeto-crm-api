@@ -1,0 +1,111 @@
+openapi: 3.0.3
+info:
+  title: NeetoCRM Notes APIs
+  version: 1.0.0
+
+servers:
+  $ref: '../schemas/common.yaml#/servers'
+
+tags:
+  - name: Notes
+    description: APIs to manage notes in your workspace.
+
+paths:
+  /notes:
+    get:
+      summary: List notes
+      tags:
+        - Notes
+      description: Retrieve a list of notes for a specific resource.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - name: resource_type
+          in: query
+          required: true
+          description: Type of resource (contacts, companies, deals, leads).
+          schema:
+            type: string
+            enum: [contacts, companies, deals, leads]
+        - name: resource_id
+          in: query
+          required: true
+          description: ID of the resource.
+          schema:
+            type: integer
+        - $ref: '../schemas/common.yaml#/page_number_param'
+        - $ref: '../schemas/common.yaml#/page_size_param'
+      responses:
+        '200':
+          description: Successfully retrieved notes.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/note.yaml#/components/schemas/note_list_response'
+    post:
+      summary: Create a note
+      tags:
+        - Notes
+      description: Create a new note for a specific resource.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/note.yaml#/components/schemas/note_create_request'
+      responses:
+        '201':
+          description: Note created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/note.yaml#/components/schemas/note_response'
+
+  /notes/{id}:
+    patch:
+      summary: Update a note
+      tags:
+        - Notes
+      description: Update an existing note by its ID.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the note to update. You can get the note `id` by listing notes for a resource using our [List notes](/api-reference/notes/list-notes) API.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/note.yaml#/components/schemas/note_update_request'
+      responses:
+        '200':
+          description: Note updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/note.yaml#/components/schemas/note_response'
+    delete:
+      summary: Delete a note
+      tags:
+        - Notes
+      description: Delete a note by its ID.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the note to delete. You can get the note `id` by listing notes for a resource using our [List notes](/api-reference/notes/list-notes) API.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Note deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/note.yaml#/components/schemas/note_response'

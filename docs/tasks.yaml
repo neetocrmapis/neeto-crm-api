@@ -1,0 +1,118 @@
+openapi: 3.0.3
+info:
+  title: NeetoCRM Tasks APIs
+  version: 1.0.0
+
+servers:
+  $ref: '../schemas/common.yaml#/servers'
+
+tags:
+  - name: Tasks
+    description: APIs to manage tasks in your workspace.
+
+paths:
+  /tasks:
+    get:
+      summary: List all tasks
+      tags:
+        - Tasks
+      description: Retrieve a list of all tasks in your workspace. Results are ordered by creation date (newest first).
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - $ref: '../schemas/common.yaml#/page_number_param'
+        - $ref: '../schemas/common.yaml#/page_size_param'
+      responses:
+        '200':
+          description: Successfully retrieved tasks.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/task.yaml#/components/schemas/task_list_response'
+    post:
+      summary: Create a task
+      tags:
+        - Tasks
+      description: Create a new task in your workspace.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/task.yaml#/components/schemas/task_request'
+      responses:
+        '201':
+          description: Task created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/task.yaml#/components/schemas/task_response'
+
+  /tasks/{id}:
+    get:
+      summary: Get a task
+      tags:
+        - Tasks
+      description: Retrieve a single task by its ID.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the task to retrieve. You can get the task `id` by listing all tasks using our [List all tasks](/api-reference/tasks/list-tasks) API.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the task.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/task.yaml#/components/schemas/task_response'
+    patch:
+      summary: Update a task
+      tags:
+        - Tasks
+      description: Update an existing task by its ID.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the task to update. You can get the task `id` by listing all tasks using our [List all tasks](/api-reference/tasks/list-tasks) API.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/task.yaml#/components/schemas/task_request'
+      responses:
+        '200':
+          description: Task updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/task.yaml#/components/schemas/task_response'
+    delete:
+      summary: Delete a task
+      tags:
+        - Tasks
+      description: Delete a task by its ID.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the task to delete. You can get the task `id` by listing all tasks using our [List all tasks](/api-reference/tasks/list-tasks) API.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Task deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/task.yaml#/components/schemas/task_delete_response'

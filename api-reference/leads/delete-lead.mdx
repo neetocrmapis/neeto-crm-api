@@ -1,22 +1,8 @@
 ---
-title: Delete Lead
-openapi: delete /leads/{id}
+title: "Delete a lead"
+openapi: "/bundled/leads.yaml DELETE /leads/{id}"
 ---
 
-# Delete Lead
+import SubdomainInfo from "/snippets/subdomain-info.mdx";
 
-Delete a lead from your CRM.
-
-## Request
-
-```bash
-DELETE /api/external/v1/leads/:id
-```
-
-## Response
-
-```json
-{
-  "message": "Lead deleted successfully"
-}
-```
+<SubdomainInfo />

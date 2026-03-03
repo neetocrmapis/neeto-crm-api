@@ -1,53 +1,8 @@
 ---
-title: Update Contact
-openapi: patch /contacts/{id}
+title: "Update a contact"
+openapi: "/bundled/contacts.yaml PATCH /contacts/{id}"
 ---
 
-# Update Contact
+import SubdomainInfo from "/snippets/subdomain-info.mdx";
 
-Update an existing contact.
-
-## Request
-
-```bash
-PATCH /api/external/v1/contacts/:id
-```
-
-## Request Body
-
-| Parameter    | Type    | Description           |
-| ------------ | ------- | --------------------- |
-| name         | string  | Contact name          |
-| email        | string  | Email address         |
-| phone_number | string  | Phone number          |
-| company_id   | integer | Associated company ID |
-| owner_id     | integer | Owner user ID         |
-| tag_ids      | array   | Array of tag IDs      |
-
-## Example
-
-```json
-{
-  "contact": {
-    "name": "John Smith",
-    "phone_number": "+1987654321"
-  }
-}
-```
-
-## Response
-
-```json
-{
-  "contact": {
-    "id": "1",
-    "name": "John Smith",
-    "email": "john@example.com",
-    "phone_number": "+1987654321",
-    "company_id": "1",
-    "organization_id": "1",
-    "created_at": "2024-01-01T00:00:00Z",
-    "updated_at": "2024-01-02T00:00:00Z"
-  }
-}
-```
+<SubdomainInfo />

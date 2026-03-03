@@ -1,55 +1,8 @@
 ---
-title: Create Lead
-openapi: post /leads
+title: "Create a lead"
+openapi: "/bundled/leads.yaml POST /leads"
 ---
 
-# Create Lead
+import SubdomainInfo from "/snippets/subdomain-info.mdx";
 
-Create a new lead in your CRM.
-
-## Request
-
-```bash
-POST /api/external/v1/leads
-```
-
-## Request Body
-
-| Parameter  | Type    | Required | Description           |
-| ---------- | ------- | -------- | --------------------- |
-| name       | string  | Yes      | Lead name             |
-| status     | string  | No       | Lead status           |
-| company_id | integer | No       | Associated company ID |
-| contact_id | integer | No       | Associated contact ID |
-| owner_id   | integer | No       | Owner user ID         |
-| tag_ids    | array   | No       | Array of tag IDs      |
-
-## Example
-
-```json
-{
-  "lead": {
-    "name": "John Doe",
-    "status": "new",
-    "company_id": 1,
-    "owner_id": 1
-  }
-}
-```
-
-## Response
-
-```json
-{
-  "lead": {
-    "id": "1",
-    "name": "John Doe",
-    "status": "new",
-    "company_id": "1",
-    "owner_id": "1",
-    "organization_id": "1",
-    "created_at": "2024-01-01T00:00:00Z",
-    "updated_at": "2024-01-01T00:00:00Z"
-  }
-}
-```
+<SubdomainInfo />

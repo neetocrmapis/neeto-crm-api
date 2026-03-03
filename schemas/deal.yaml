@@ -103,6 +103,63 @@ components:
           format: date-time
           description: Timestamp when the deal was last updated.
 
+    # Deal create/update request
+    deal_request:
+      type: object
+      properties:
+        deal:
+          type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+              description: Deal name.
+              example: "Eve Enterprise Deal"
+            value:
+              type: number
+              description: Monetary value of the deal.
+              example: 10000
+            currency:
+              type: string
+              description: "Currency code (default: USD)."
+              example: "USD"
+            status:
+              type: string
+              enum: [in_progress, won, lost]
+              description: Deal status.
+              example: "in_progress"
+            company_id:
+              type: string
+              description: Unique identifier of the associated company.
+              example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+            contact_id:
+              type: integer
+              description: Associated contact ID.
+              example: 1
+            owner_id:
+              type: string
+              description: Unique identifier of the owner.
+              example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+            stage_id:
+              type: integer
+              description: Stage ID.
+              example: 1
+            pipeline_id:
+              type: integer
+              description: Pipeline ID.
+              example: 1
+            position:
+              type: integer
+              description: Position in pipeline.
+              example: 1
+            tag_ids:
+              type: array
+              items:
+                type: string
+              description: Array of tag IDs.
+              example: ["a1b2c3d4-e5f6-7890-abcd-ef1234567890", "b2c3d4e5-f6a7-8901-bcde-f12345678901"]
+
     # Deal list response structure
     deal_list_response:
       type: object
@@ -114,3 +171,62 @@ components:
           description: List of deals.
         pagination:
           $ref: "../schemas/common.yaml#/components/schemas/pagination"
+      example:
+        deals:
+          - id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+            name: "Eve Enterprise Deal"
+            status: "in_progress"
+            value: 10000
+            currency: "USD"
+            price: "$ 10000"
+            unique_number: "D-001"
+            contact_name: "Eve"
+            contact_id: "c1d2e3f4-a5b6-7890-cdef-123456789012"
+            company_name: "Eve Corp"
+            company_id: "d2e3f4a5-b6c7-8901-def0-234567890123"
+            owner: null
+            pipeline: null
+            stage: null
+            tags: []
+            created_at: "2025-03-15T10:30:00.000Z"
+            updated_at: "2025-03-15T10:30:00.000Z"
+        pagination:
+          total_records: 42
+          total_pages: 1
+          current_page_number: 1
+          page_size: 30
+
+    # Single deal response
+    deal_response:
+      type: object
+      properties:
+        deal:
+          $ref: "#/components/schemas/deal"
+      example:
+        deal:
+          id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          name: "Eve Enterprise Deal"
+          status: "in_progress"
+          value: 10000
+          currency: "USD"
+          price: "$ 10000"
+          unique_number: "D-001"
+          contact_name: "Eve"
+          contact_id: "c1d2e3f4-a5b6-7890-cdef-123456789012"
+          company_name: "Eve Corp"
+          company_id: "d2e3f4a5-b6c7-8901-def0-234567890123"
+          owner: null
+          pipeline: null
+          stage: null
+          tags: []
+          created_at: "2025-03-15T10:30:00.000Z"
+          updated_at: "2025-03-15T10:30:00.000Z"
+
+    # Delete response
+    deal_delete_response:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        message: "Deal deleted successfully"

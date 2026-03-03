@@ -8,7 +8,7 @@ servers:
 
 tags:
   - name: Leads
-    description: APIs to list leads in your workspace.
+    description: APIs to manage leads in your workspace.
 
 paths:
   /leads:
@@ -16,10 +16,9 @@ paths:
       summary: List all leads
       tags:
         - Leads
-      description: Retrieve a paginated list of all leads in your workspace. Results are ordered by creation date (newest first).
+      description: Retrieve a list of all leads in your workspace. Results are ordered by creation date (newest first).
       parameters:
         - $ref: '../schemas/common.yaml#/api_key_header'
-        - $ref: '../schemas/common.yaml#/accept_header'
         - $ref: '../schemas/common.yaml#/page_number_param'
         - $ref: '../schemas/common.yaml#/page_size_param'
       responses:
@@ -29,13 +28,91 @@ paths:
             application/json:
               schema:
                 $ref: '../schemas/lead.yaml#/components/schemas/lead_list_response'
-        '401':
-          description: Unauthorized - Invalid or missing API key.
+    post:
+      summary: Create a lead
+      tags:
+        - Leads
+      description: Create a new lead in your workspace.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/lead.yaml#/components/schemas/lead_request'
+      responses:
+        '201':
+          description: Lead created successfully.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    example: "Could not authenticate, invalid API Key"
+                $ref: '../schemas/lead.yaml#/components/schemas/lead_response'
+
+  /leads/{id}:
+    get:
+      summary: Get a lead
+      tags:
+        - Leads
+      description: Retrieve a single lead by its ID.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the lead to retrieve. You can get the lead `id` by listing all leads using our [List all leads](/api-reference/leads/list-leads) API.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the lead.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/lead.yaml#/components/schemas/lead_response'
+    patch:
+      summary: Update a lead
+      tags:
+        - Leads
+      description: Update an existing lead by its ID.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the lead to update. You can get the lead `id` by listing all leads using our [List all leads](/api-reference/leads/list-leads) API.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/lead.yaml#/components/schemas/lead_request'
+      responses:
+        '200':
+          description: Lead updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/lead.yaml#/components/schemas/lead_response'
+    delete:
+      summary: Delete a lead
+      tags:
+        - Leads
+      description: Delete a lead by its ID.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the lead to delete. You can get the lead `id` by listing all leads using our [List all leads](/api-reference/leads/list-leads) API.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lead deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/lead.yaml#/components/schemas/lead_delete_response'

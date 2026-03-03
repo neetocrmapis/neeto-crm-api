@@ -1,48 +1,8 @@
 ---
-title: Create Note
-openapi: post /notes
+title: "Create a note"
+openapi: "/bundled/notes.yaml POST /notes"
 ---
 
-# Create Note
+import SubdomainInfo from "/snippets/subdomain-info.mdx";
 
-Create a new note for a specific resource.
-
-## Request
-
-```bash
-POST /api/external/v1/notes
-```
-
-## Request Body
-
-| Parameter     | Type    | Required | Description                                          |
-| ------------- | ------- | -------- | ---------------------------------------------------- |
-| note          | object  | Yes      | Note object                                          |
-| note[content] | string  | Yes      | Note content                                         |
-| resource_type | string  | Yes      | Type of resource (contacts, companies, deals, leads) |
-| resource_id   | integer | Yes      | ID of the resource                                   |
-
-## Example
-
-```json
-{
-  "note": {
-    "content": "Important note about this contact"
-  },
-  "resource_type": "contacts",
-  "resource_id": 1
-}
-```
-
-## Response
-
-```json
-{
-  "note": {
-    "id": "1",
-    "content": "Important note about this contact",
-    "created_at": "2024-01-01T00:00:00Z",
-    "updated_at": "2024-01-01T00:00:00Z"
-  }
-}
-```
+<SubdomainInfo />

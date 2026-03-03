@@ -1,22 +1,8 @@
 ---
-title: Delete Company
-openapi: delete /companies/{id}
+title: "Delete a company"
+openapi: "/bundled/companies.yaml DELETE /companies/{id}"
 ---
 
-# Delete Company
+import SubdomainInfo from "/snippets/subdomain-info.mdx";
 
-Delete a company from your CRM.
-
-## Request
-
-```bash
-DELETE /api/external/v1/companies/:id
-```
-
-## Response
-
-```json
-{
-  "message": "Company deleted successfully"
-}
-```
+<SubdomainInfo />
