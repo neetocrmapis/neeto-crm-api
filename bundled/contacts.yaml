@@ -50,73 +50,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/contact_response'
-  /contacts/{id}:
-    get:
-      summary: Get a contact
-      tags:
-        - Contacts
-      description: Retrieve a single contact by its ID.
-      parameters:
-        - $ref: '#/components/parameters/api_key_header'
-        - name: id
-          in: path
-          required: true
-          description: The ID of the contact to retrieve. You can get the contact `id` by listing all contacts using our [List all contacts](/api-reference/contacts/list-contacts) API.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successfully retrieved the contact.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/contact_response'
-    patch:
-      summary: Update a contact
-      tags:
-        - Contacts
-      description: Update an existing contact by its ID.
-      parameters:
-        - $ref: '#/components/parameters/api_key_header'
-        - name: id
-          in: path
-          required: true
-          description: The ID of the contact to update. You can get the contact `id` by listing all contacts using our [List all contacts](/api-reference/contacts/list-contacts) API.
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/contact_request'
-      responses:
-        '200':
-          description: Contact updated successfully.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/contact_response'
-    delete:
-      summary: Delete a contact
-      tags:
-        - Contacts
-      description: Delete a contact by its ID.
-      parameters:
-        - $ref: '#/components/parameters/api_key_header'
-        - name: id
-          in: path
-          required: true
-          description: The ID of the contact to delete. You can get the contact `id` by listing all contacts using our [List all contacts](/api-reference/contacts/list-contacts) API.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Contact deleted successfully.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/contact_delete_response'
 components:
   parameters:
     api_key_header:
@@ -158,32 +91,15 @@ components:
           type: string
           nullable: true
           description: Phone number of the contact.
-        company_id:
+        owner:
           type: string
           nullable: true
-          description: Unique identifier of the associated company.
-        organization_id:
-          type: string
-          description: Unique identifier of the organization.
-        tag_ids:
+          description: Owner of the contact.
+        tags:
           type: array
           items:
             type: string
-          description: IDs of tags associated with the contact.
-        owner:
-          type: object
-          nullable: true
-          description: Owner of the contact.
-          properties:
-            id:
-              type: string
-              description: Unique identifier of the owner.
-            name:
-              type: string
-              description: Name of the owner.
-            email:
-              type: string
-              description: Email of the owner.
+          description: Tags associated with the contact.
         company:
           type: object
           nullable: true
@@ -195,21 +111,6 @@ components:
             name:
               type: string
               description: Name of the company.
-        field_values:
-          type: array
-          description: Custom field values associated with the contact.
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: Unique identifier of the field value.
-              field_id:
-                type: string
-                description: Unique identifier of the custom field.
-              value:
-                type: string
-                description: Value of the custom field.
         created_at:
           type: string
           format: date-time
@@ -338,10 +239,3 @@ components:
           company:
             id: null
             name: null
-    contact_delete_response:
-      type: object
-      properties:
-        message:
-          type: string
-      example:
-        message: Contact deleted successfully

@@ -40,33 +40,32 @@ components:
         unique_number:
           type: string
           description: Auto-generated unique number for the deal.
-        contact_name:
-          type: string
-          nullable: true
-          description: Name of the associated contact.
-        contact_id:
-          type: string
-          nullable: true
-          description: Unique identifier of the associated contact.
-        company_name:
-          type: string
-          nullable: true
-          description: Name of the associated company.
-        company_id:
-          type: string
-          nullable: true
-          description: Unique identifier of the associated company.
-        owner:
+        contact:
           type: object
           nullable: true
-          description: Owner of the deal.
+          description: Associated contact.
           properties:
             id:
               type: string
-              description: Unique identifier of the owner.
+              description: Unique identifier of the contact.
             name:
               type: string
-              description: Name of the owner.
+              description: Name of the contact.
+        company:
+          type: object
+          nullable: true
+          description: Associated company.
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the company.
+            name:
+              type: string
+              description: Name of the company.
+        owner:
+          type: string
+          nullable: true
+          description: Owner of the deal.
         pipeline:
           type: object
           nullable: true
@@ -120,23 +119,11 @@ components:
               type: number
               description: Monetary value of the deal.
               example: 10000
-            currency:
-              type: string
-              description: "Currency code (default: USD)."
-              example: "USD"
             status:
               type: string
               enum: [in_progress, won, lost]
               description: Deal status.
               example: "in_progress"
-            company_id:
-              type: string
-              description: Unique identifier of the associated company.
-              example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-            contact_id:
-              type: string
-              description: Associated contact ID.
-              example: "c1d2e3f4-a5b6-7890-cdef-123456789012"
             owner_id:
               type: string
               description: Unique identifier of the owner.
@@ -180,10 +167,12 @@ components:
             currency: "USD"
             price: "$ 10000"
             unique_number: "D-001"
-            contact_name: "Eve"
-            contact_id: "c1d2e3f4-a5b6-7890-cdef-123456789012"
-            company_name: "Eve Corp"
-            company_id: "d2e3f4a5-b6c7-8901-def0-234567890123"
+            contact:
+              id: "c1d2e3f4-a5b6-7890-cdef-123456789012"
+              name: "Eve"
+            company:
+              id: "d2e3f4a5-b6c7-8901-def0-234567890123"
+              name: "Eve Corp"
             owner: null
             pipeline: null
             stage: null
@@ -211,22 +200,15 @@ components:
           currency: "USD"
           price: "$ 10000"
           unique_number: "D-001"
-          contact_name: "Eve"
-          contact_id: "c1d2e3f4-a5b6-7890-cdef-123456789012"
-          company_name: "Eve Corp"
-          company_id: "d2e3f4a5-b6c7-8901-def0-234567890123"
+          contact:
+            id: "c1d2e3f4-a5b6-7890-cdef-123456789012"
+            name: "Eve"
+          company:
+            id: "d2e3f4a5-b6c7-8901-def0-234567890123"
+            name: "Eve Corp"
           owner: null
           pipeline: null
           stage: null
           tags: []
           created_at: "2025-03-15T10:30:00.000Z"
           updated_at: "2025-03-15T10:30:00.000Z"
-
-    # Delete response
-    deal_delete_response:
-      type: object
-      properties:
-        message:
-          type: string
-      example:
-        message: "Deal deleted successfully"
