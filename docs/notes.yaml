@@ -2,9 +2,6 @@ openapi: 3.0.3
 info:
   title: NeetoCRM Notes APIs
   version: 1.0.0
-  description: APIs for managing notes in your NeetoCRM workspace.
-  contact:
-    email: support@neetocrm.com
 
 servers:
   $ref: '../schemas/common.yaml#/servers'

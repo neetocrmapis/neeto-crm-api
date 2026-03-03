@@ -2,9 +2,6 @@ openapi: 3.0.3
 info:
   title: NeetoCRM Tasks APIs
   version: 1.0.0
-  description: APIs for managing tasks in your NeetoCRM workspace.
-  contact:
-    email: support@neetocrm.com
 servers:
   - description: NeetoCRM APIs
     url: https://{your-subdomain}.neetocrm.com/api/external/v1
