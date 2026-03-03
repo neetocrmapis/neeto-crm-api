@@ -134,21 +134,21 @@ components:
               description: Unique identifier of the associated company.
               example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
             contact_id:
-              type: integer
+              type: string
               description: Associated contact ID.
-              example: 1
+              example: "c1d2e3f4-a5b6-7890-cdef-123456789012"
             owner_id:
               type: string
               description: Unique identifier of the owner.
               example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
             stage_id:
-              type: integer
+              type: string
               description: Stage ID.
-              example: 1
+              example: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
             pipeline_id:
-              type: integer
+              type: string
               description: Pipeline ID.
-              example: 1
+              example: "b2c3d4e5-f6a7-8901-bcde-f12345678901"
             position:
               type: integer
               description: Position in pipeline.
