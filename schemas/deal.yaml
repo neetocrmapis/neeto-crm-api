@@ -115,7 +115,7 @@ components:
             name:
               type: string
               description: Deal name.
-              example: "Big Deal"
+              example: "Eve Enterprise Deal"
             value:
               type: number
               description: Monetary value of the deal.
@@ -171,6 +171,30 @@ components:
           description: List of deals.
         pagination:
           $ref: "../schemas/common.yaml#/components/schemas/pagination"
+      example:
+        deals:
+          - id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+            name: "Eve Enterprise Deal"
+            status: "in_progress"
+            value: 10000
+            currency: "USD"
+            price: "$ 10000"
+            unique_number: "D-001"
+            contact_name: "Eve"
+            contact_id: "c1d2e3f4-a5b6-7890-cdef-123456789012"
+            company_name: "Eve Corp"
+            company_id: "d2e3f4a5-b6c7-8901-def0-234567890123"
+            owner: null
+            pipeline: null
+            stage: null
+            tags: []
+            created_at: "2025-03-15T10:30:00.000Z"
+            updated_at: "2025-03-15T10:30:00.000Z"
+        pagination:
+          total_records: 42
+          total_pages: 1
+          current_page_number: 1
+          page_size: 30
 
     # Single deal response
     deal_response:
@@ -178,6 +202,25 @@ components:
       properties:
         deal:
           $ref: "#/components/schemas/deal"
+      example:
+        deal:
+          id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          name: "Eve Enterprise Deal"
+          status: "in_progress"
+          value: 10000
+          currency: "USD"
+          price: "$ 10000"
+          unique_number: "D-001"
+          contact_name: "Eve"
+          contact_id: "c1d2e3f4-a5b6-7890-cdef-123456789012"
+          company_name: "Eve Corp"
+          company_id: "d2e3f4a5-b6c7-8901-def0-234567890123"
+          owner: null
+          pipeline: null
+          stage: null
+          tags: []
+          created_at: "2025-03-15T10:30:00.000Z"
+          updated_at: "2025-03-15T10:30:00.000Z"
 
     # Delete response
     deal_delete_response:
@@ -185,4 +228,5 @@ components:
       properties:
         message:
           type: string
-          example: "Deal deleted successfully"
+      example:
+        message: "Deal deleted successfully"
