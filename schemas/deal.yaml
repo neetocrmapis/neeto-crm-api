@@ -122,7 +122,7 @@ components:
               example: 10000
             currency:
               type: string
-              description: Currency code (default: USD).
+              description: "Currency code (default: USD)."
               example: "USD"
             status:
               type: string
