@@ -19,7 +19,7 @@ paths:
       summary: List all tasks
       tags:
         - Tasks
-      description: Retrieve a paginated list of all tasks in your workspace. Results are ordered by creation date (newest first).
+      description: Retrieve a list of all tasks in your workspace. Results are ordered by creation date (newest first).
       parameters:
         - $ref: '../schemas/common.yaml#/api_key_header'
         - $ref: '../schemas/common.yaml#/accept_header'

@@ -19,7 +19,7 @@ paths:
       summary: List all companies
       tags:
         - Companies
-      description: Retrieve a paginated list of all companies in your workspace. Results are ordered by creation date (newest first).
+      description: Retrieve a list of all companies in your workspace. Results are ordered by creation date (newest first).
       parameters:
         - $ref: '../schemas/common.yaml#/api_key_header'
         - $ref: '../schemas/common.yaml#/accept_header'

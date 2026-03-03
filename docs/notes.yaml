@@ -19,7 +19,7 @@ paths:
       summary: List notes
       tags:
         - Notes
-      description: Retrieve a paginated list of notes for a specific resource.
+      description: Retrieve a list of notes for a specific resource.
       parameters:
         - $ref: '../schemas/common.yaml#/api_key_header'
         - $ref: '../schemas/common.yaml#/accept_header'
