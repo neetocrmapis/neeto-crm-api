@@ -1,0 +1,378 @@
+openapi: 3.0.3
+info:
+  title: NeetoCRM Tasks APIs
+  version: 1.0.0
+  description: APIs for managing tasks in your NeetoCRM workspace.
+  contact:
+    email: support@neetocrm.com
+servers:
+  - description: NeetoCRM APIs
+    url: https://{your-subdomain}.neetocrm.com/api/external/v1
+    variables:
+      your-subdomain:
+        default: spinkart
+        description: Replace **spinkart** with your [workspace's subdomain](/getting-started/identifying-subdomain).
+tags:
+  - name: Tasks
+    description: APIs to manage tasks in your workspace.
+paths:
+  /tasks:
+    get:
+      summary: List all tasks
+      tags:
+        - Tasks
+      description: Retrieve a list of all tasks in your workspace. Results are ordered by creation date (newest first).
+      parameters:
+        - $ref: '#/components/parameters/api_key_header'
+        - $ref: '#/components/parameters/accept_header'
+        - $ref: '#/components/parameters/page_number_param'
+        - $ref: '#/components/parameters/page_size_param'
+      responses:
+        '200':
+          description: Successfully retrieved tasks.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/task_list_response'
+    post:
+      summary: Create a task
+      tags:
+        - Tasks
+      description: Create a new task in your workspace.
+      parameters:
+        - $ref: '#/components/parameters/api_key_header'
+        - $ref: '#/components/parameters/accept_header'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/task_request'
+      responses:
+        '201':
+          description: Task created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/task_response'
+  /tasks/{id}:
+    get:
+      summary: Get a task
+      tags:
+        - Tasks
+      description: Retrieve a single task by its ID.
+      parameters:
+        - $ref: '#/components/parameters/api_key_header'
+        - $ref: '#/components/parameters/accept_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the task to retrieve. You can get the task `id` by listing all tasks using our [List all tasks](/api-reference/tasks/list-tasks) API.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the task.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/task_response'
+    patch:
+      summary: Update a task
+      tags:
+        - Tasks
+      description: Update an existing task by its ID.
+      parameters:
+        - $ref: '#/components/parameters/api_key_header'
+        - $ref: '#/components/parameters/accept_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the task to update. You can get the task `id` by listing all tasks using our [List all tasks](/api-reference/tasks/list-tasks) API.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/task_request'
+      responses:
+        '200':
+          description: Task updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/task_response'
+    delete:
+      summary: Delete a task
+      tags:
+        - Tasks
+      description: Delete a task by its ID.
+      parameters:
+        - $ref: '#/components/parameters/api_key_header'
+        - $ref: '#/components/parameters/accept_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the task to delete. You can get the task `id` by listing all tasks using our [List all tasks](/api-reference/tasks/list-tasks) API.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Task deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/task_delete_response'
+components:
+  parameters:
+    api_key_header:
+      in: header
+      name: X-Api-Key
+      description: X-Api-Key is used to authenticate requests using an API key. Provide your API key in this header to access protected endpoints. Refer to [Authentication](/getting-started/authentication) for more information.
+      required: true
+      schema:
+        type: string
+    accept_header:
+      in: header
+      name: Accept
+      description: Specifies the expected response format. Must be set to `application/json` for proper API communication.
+      required: true
+      schema:
+        type: string
+        enum:
+          - application/json
+        default: application/json
+    page_number_param:
+      in: query
+      name: page_number
+      description: Retrieve paginated results by specifying the desired page number. If this parameter is absent, all results will be returned.
+      required: false
+      schema:
+        type: integer
+    page_size_param:
+      in: query
+      name: page_size
+      description: Set the number of results returned in the response. Defaulting to 30 when omitted.
+      required: false
+      schema:
+        type: integer
+  schemas:
+    task:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the task.
+        title:
+          type: string
+          description: Title of the task.
+        description:
+          type: string
+          nullable: true
+          description: Description of the task.
+        status:
+          type: string
+          description: Current status of the task.
+        priority:
+          type: string
+          description: Priority level of the task.
+        due_date:
+          type: string
+          format: date
+          nullable: true
+          description: Due date of the task.
+        due_time:
+          type: string
+          nullable: true
+          description: Due time of the task.
+        owner_id:
+          type: string
+          nullable: true
+          description: Unique identifier of the owner.
+        contact_id:
+          type: string
+          nullable: true
+          description: Unique identifier of the associated contact.
+        company_id:
+          type: string
+          nullable: true
+          description: Unique identifier of the associated company.
+        deal_id:
+          type: string
+          nullable: true
+          description: Unique identifier of the associated deal.
+        lead_id:
+          type: string
+          nullable: true
+          description: Unique identifier of the associated lead.
+        organization_id:
+          type: string
+          description: Unique identifier of the organization.
+        owner:
+          type: object
+          nullable: true
+          description: Owner of the task.
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the owner.
+            name:
+              type: string
+              description: Name of the owner.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the task was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the task was last updated.
+    pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+          description: Total number of records.
+        total_pages:
+          type: integer
+          description: Total number of pages available.
+        current_page_number:
+          type: integer
+          description: Current page number.
+        page_size:
+          type: integer
+          description: Number of records per page.
+    task_list_response:
+      type: object
+      properties:
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/task'
+          description: List of tasks.
+        pagination:
+          $ref: '#/components/schemas/pagination'
+      example:
+        tasks:
+          - id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+            title: Follow up with Eve
+            description: Send proposal
+            status: pending
+            priority: high
+            due_date: '2025-03-20'
+            due_time: '14:00'
+            owner_id: null
+            contact_id: c1d2e3f4-a5b6-7890-cdef-123456789012
+            company_id: null
+            deal_id: null
+            lead_id: null
+            organization_id: org-123
+            owner: null
+            created_at: '2025-03-15T10:30:00.000Z'
+            updated_at: '2025-03-15T10:30:00.000Z'
+          - id: b2c3d4e5-f6a7-8901-bcde-f12345678901
+            title: Call Oliver
+            description: Discuss contract terms
+            status: in_progress
+            priority: medium
+            due_date: '2025-03-18'
+            due_time: null
+            owner_id: null
+            contact_id: null
+            company_id: d2e3f4a5-b6c7-8901-def0-234567890123
+            deal_id: null
+            lead_id: null
+            organization_id: org-123
+            owner: null
+            created_at: '2025-03-14T14:22:00.000Z'
+            updated_at: '2025-03-14T14:22:00.000Z'
+        pagination:
+          total_records: 42
+          total_pages: 2
+          current_page_number: 1
+          page_size: 30
+    task_request:
+      type: object
+      properties:
+        task:
+          type: object
+          required:
+            - title
+          properties:
+            title:
+              type: string
+              description: Task title.
+              example: Follow up with Eve
+            description:
+              type: string
+              description: Task description.
+              example: Send proposal
+            status:
+              type: string
+              description: Task status.
+              example: pending
+            priority:
+              type: string
+              description: Task priority.
+              example: high
+            due_date:
+              type: string
+              format: date
+              description: Due date.
+              example: '2024-01-15'
+            due_time:
+              type: string
+              description: Due time.
+              example: '14:00'
+            owner_id:
+              type: string
+              description: Unique identifier of the owner.
+              example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+            contact_id:
+              type: integer
+              description: Associated contact ID.
+              example: 1
+            company_id:
+              type: string
+              description: Unique identifier of the associated company.
+              example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+            deal_id:
+              type: integer
+              description: Associated deal ID.
+              example: 1
+            lead_id:
+              type: integer
+              description: Associated lead ID.
+              example: 1
+    task_response:
+      type: object
+      properties:
+        task:
+          $ref: '#/components/schemas/task'
+      example:
+        task:
+          id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          title: Follow up with Eve
+          description: Send proposal
+          status: pending
+          priority: high
+          due_date: '2025-03-20'
+          due_time: '14:00'
+          owner_id: null
+          contact_id: c1d2e3f4-a5b6-7890-cdef-123456789012
+          company_id: null
+          deal_id: null
+          lead_id: null
+          organization_id: org-123
+          owner: null
+          created_at: '2025-03-15T10:30:00.000Z'
+          updated_at: '2025-03-15T10:30:00.000Z'
+    task_delete_response:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        message: Task deleted successfully
