@@ -8,24 +8,24 @@ servers:
     variables:
       your-subdomain:
         default: spinkart
-        description: Replace **spinkart** with your [workspace's subdomain](/getting-started/identifying-subdomain).
+        description: Your [workspace subdomain](/getting-started/identifying-subdomain).
 tags:
   - name: Contacts
-    description: APIs to manage contacts in your workspace.
+    description: Manage contacts.
 paths:
   /contacts:
     get:
       summary: List all contacts
       tags:
         - Contacts
-      description: Retrieve a list of all contacts in your workspace. Results are ordered by creation date (newest first).
+      description: List contacts.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
         - $ref: '#/components/parameters/page_number_param'
         - $ref: '#/components/parameters/page_size_param'
       responses:
         '200':
-          description: Successfully retrieved contacts.
+          description: Contacts retrieved.
           content:
             application/json:
               schema:
@@ -34,7 +34,7 @@ paths:
       summary: Create a contact
       tags:
         - Contacts
-      description: Create a new contact in your workspace.
+      description: Create a contact.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
       requestBody:
@@ -45,7 +45,7 @@ paths:
               $ref: '#/components/schemas/contact_request'
       responses:
         '201':
-          description: Contact created successfully.
+          description: Contact created.
           content:
             application/json:
               schema:
@@ -55,21 +55,21 @@ components:
     api_key_header:
       in: header
       name: X-Api-Key
-      description: X-Api-Key is used to authenticate requests using an API key. Provide your API key in this header to access protected endpoints. Refer to [Authentication](/getting-started/authentication) for more information.
+      description: API key. See [Authentication](/getting-started/authentication).
       required: true
       schema:
         type: string
     page_number_param:
       in: query
       name: page_number
-      description: Retrieve paginated results by specifying the desired page number. If this parameter is absent, all results will be returned.
+      description: Page number. Omit to return all results.
       required: false
       schema:
         type: integer
     page_size_param:
       in: query
       name: page_size
-      description: Set the number of results returned in the response. Defaulting to 30 when omitted.
+      description: Number of results per page. Defaults to 30.
       required: false
       schema:
         type: integer
