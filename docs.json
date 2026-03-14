@@ -52,32 +52,32 @@
         "group": "Contacts API",
         "icon": "/assets/icons/contacts.svg",
         "pages": [
-          "api-reference/contacts/list-contacts",
-          "api-reference/contacts/create-contact"
+          "api-reference/contacts/list",
+          "api-reference/contacts/create"
         ]
       },
       {
         "group": "Companies API",
         "icon": "/assets/icons/companies.svg",
         "pages": [
-          "api-reference/companies/list-companies",
-          "api-reference/companies/create-company"
+          "api-reference/companies/list",
+          "api-reference/companies/create"
         ]
       },
       {
         "group": "Deals API",
         "icon": "/assets/icons/deals.svg",
         "pages": [
-          "api-reference/deals/list-deals",
-          "api-reference/deals/create-deal"
+          "api-reference/deals/list",
+          "api-reference/deals/create"
         ]
       },
       {
         "group": "Leads API",
         "icon": "/assets/icons/leads.svg",
         "pages": [
-          "api-reference/leads/list-leads",
-          "api-reference/leads/create-lead"
+          "api-reference/leads/list",
+          "api-reference/leads/create"
         ]
       }
     ]
