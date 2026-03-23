@@ -8,24 +8,24 @@ servers:
     variables:
       your-subdomain:
         default: spinkart
-        description: Your [workspace subdomain](/getting-started/identifying-subdomain).
+        description: Replace **spinkart** with your [workspace's subdomain](/getting-started/identifying-subdomain).
 tags:
   - name: Deals
-    description: Manage deals.
+    description: APIs to manage deals in your workspace.
 paths:
   /deals:
     get:
       summary: List all deals
       tags:
         - Deals
-      description: List deals.
+      description: Retrieve a list of all deals in your workspace. Results are ordered by creation date (newest first).
       parameters:
         - $ref: '#/components/parameters/api_key_header'
         - $ref: '#/components/parameters/page_number_param'
         - $ref: '#/components/parameters/page_size_param'
       responses:
         '200':
-          description: Deals retrieved.
+          description: Successfully retrieved deals.
           content:
             application/json:
               schema:
@@ -34,7 +34,7 @@ paths:
       summary: Create a deal
       tags:
         - Deals
-      description: Create a deal.
+      description: Create a new deal in your workspace.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
       requestBody:
@@ -45,31 +45,98 @@ paths:
               $ref: '#/components/schemas/deal_request'
       responses:
         '201':
-          description: Deal created.
+          description: Deal created successfully.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/deal_response'
+  /deals/{id}:
+    get:
+      summary: Get a deal
+      tags:
+        - Deals
+      description: Retrieve a single deal by its ID.
+      parameters:
+        - $ref: '#/components/parameters/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the deal to retrieve. You can get the deal `id` by listing all deals using our [List all deals](/api-reference/deals/list) API.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the deal.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/deal_response'
+    patch:
+      summary: Update a deal
+      tags:
+        - Deals
+      description: Update an existing deal by its ID.
+      parameters:
+        - $ref: '#/components/parameters/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the deal to update. You can get the deal `id` by listing all deals using our [List all deals](/api-reference/deals/list) API.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/deal_request'
+      responses:
+        '200':
+          description: Deal updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/deal_response'
+    delete:
+      summary: Delete a deal
+      tags:
+        - Deals
+      description: Delete a deal by its ID.
+      parameters:
+        - $ref: '#/components/parameters/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the deal to delete. You can get the deal `id` by listing all deals using our [List all deals](/api-reference/deals/list) API.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Deal deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/deal_delete_response'
 components:
   parameters:
     api_key_header:
       in: header
       name: X-Api-Key
-      description: API key. See [Authentication](/getting-started/authentication).
+      description: X-Api-Key is used to authenticate requests using an API key. Provide your API key in this header to access protected endpoints. Refer to [Authentication](/getting-started/authentication) for more information.
       required: true
       schema:
         type: string
     page_number_param:
       in: query
       name: page_number
-      description: Page number. Omit to return all results.
+      description: Retrieve paginated results by specifying the desired page number. If this parameter is absent, all results will be returned.
       required: false
       schema:
         type: integer
     page_size_param:
       in: query
       name: page_size
-      description: Number of results per page. Defaults to 30.
+      description: Set the number of results returned in the response. Defaulting to 30 when omitted.
       required: false
       schema:
         type: integer
@@ -300,3 +367,10 @@ components:
           tags: []
           created_at: '2025-03-15T10:30:00.000Z'
           updated_at: '2025-03-15T10:30:00.000Z'
+    deal_delete_response:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        message: Deal deleted successfully

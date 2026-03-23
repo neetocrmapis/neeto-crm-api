@@ -212,3 +212,12 @@ components:
           tags: []
           created_at: "2025-03-15T10:30:00.000Z"
           updated_at: "2025-03-15T10:30:00.000Z"
+
+    # Delete response
+    deal_delete_response:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        message: "Deal deleted successfully"

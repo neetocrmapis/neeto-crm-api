@@ -53,7 +53,10 @@
         "icon": "/assets/icons/contacts.svg",
         "pages": [
           "api-reference/contacts/list",
-          "api-reference/contacts/create"
+          "api-reference/contacts/create",
+          "api-reference/contacts/get",
+          "api-reference/contacts/update",
+          "api-reference/contacts/delete"
         ]
       },
       {
@@ -61,7 +64,10 @@
         "icon": "/assets/icons/companies.svg",
         "pages": [
           "api-reference/companies/list",
-          "api-reference/companies/create"
+          "api-reference/companies/create",
+          "api-reference/companies/get",
+          "api-reference/companies/update",
+          "api-reference/companies/delete"
         ]
       },
       {
@@ -69,7 +75,10 @@
         "icon": "/assets/icons/deals.svg",
         "pages": [
           "api-reference/deals/list",
-          "api-reference/deals/create"
+          "api-reference/deals/create",
+          "api-reference/deals/get",
+          "api-reference/deals/update",
+          "api-reference/deals/delete"
         ]
       },
       {
@@ -77,7 +86,10 @@
         "icon": "/assets/icons/leads.svg",
         "pages": [
           "api-reference/leads/list",
-          "api-reference/leads/create"
+          "api-reference/leads/create",
+          "api-reference/leads/get",
+          "api-reference/leads/update",
+          "api-reference/leads/delete"
         ]
       }
     ]

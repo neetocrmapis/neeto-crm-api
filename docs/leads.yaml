@@ -48,3 +48,71 @@ paths:
             application/json:
               schema:
                 $ref: '../schemas/lead.yaml#/components/schemas/lead_response'
+
+  /leads/{id}:
+    get:
+      summary: Get a lead
+      tags:
+        - Leads
+      description: Retrieve a single lead by its ID.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the lead to retrieve. You can get the lead `id` by listing all leads using our [List all leads](/api-reference/leads/list) API.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the lead.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/lead.yaml#/components/schemas/lead_response'
+    patch:
+      summary: Update a lead
+      tags:
+        - Leads
+      description: Update an existing lead by its ID.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the lead to update. You can get the lead `id` by listing all leads using our [List all leads](/api-reference/leads/list) API.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/lead.yaml#/components/schemas/lead_request'
+      responses:
+        '200':
+          description: Lead updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/lead.yaml#/components/schemas/lead_response'
+    delete:
+      summary: Delete a lead
+      tags:
+        - Leads
+      description: Delete a lead by its ID.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the lead to delete. You can get the lead `id` by listing all leads using our [List all leads](/api-reference/leads/list) API.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lead deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/lead.yaml#/components/schemas/lead_delete_response'
