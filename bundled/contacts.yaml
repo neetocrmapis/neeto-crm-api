@@ -8,24 +8,24 @@ servers:
     variables:
       your-subdomain:
         default: spinkart
-        description: Your [workspace subdomain](/getting-started/identifying-subdomain).
+        description: Replace **spinkart** with your [workspace's subdomain](/getting-started/identifying-subdomain).
 tags:
   - name: Contacts
-    description: Manage contacts.
+    description: APIs to manage contacts in your workspace.
 paths:
   /contacts:
     get:
       summary: List all contacts
       tags:
         - Contacts
-      description: List contacts.
+      description: Retrieve a list of all contacts in your workspace. Results are ordered by creation date (newest first).
       parameters:
         - $ref: '#/components/parameters/api_key_header'
         - $ref: '#/components/parameters/page_number_param'
         - $ref: '#/components/parameters/page_size_param'
       responses:
         '200':
-          description: Contacts retrieved.
+          description: Successfully retrieved contacts.
           content:
             application/json:
               schema:
@@ -34,7 +34,7 @@ paths:
       summary: Create a contact
       tags:
         - Contacts
-      description: Create a contact.
+      description: Create a new contact in your workspace.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
       requestBody:
@@ -45,31 +45,98 @@ paths:
               $ref: '#/components/schemas/contact_request'
       responses:
         '201':
-          description: Contact created.
+          description: Contact created successfully.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/contact_response'
+  /contacts/{id}:
+    get:
+      summary: Get a contact
+      tags:
+        - Contacts
+      description: Retrieve a single contact by its ID.
+      parameters:
+        - $ref: '#/components/parameters/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the contact to retrieve. You can get the contact `id` by listing all contacts using our [List all contacts](/api-reference/contacts/list) API.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the contact.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contact_response'
+    patch:
+      summary: Update a contact
+      tags:
+        - Contacts
+      description: Update an existing contact by its ID.
+      parameters:
+        - $ref: '#/components/parameters/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the contact to update. You can get the contact `id` by listing all contacts using our [List all contacts](/api-reference/contacts/list) API.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contact_request'
+      responses:
+        '200':
+          description: Contact updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contact_response'
+    delete:
+      summary: Delete a contact
+      tags:
+        - Contacts
+      description: Delete a contact by its ID.
+      parameters:
+        - $ref: '#/components/parameters/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the contact to delete. You can get the contact `id` by listing all contacts using our [List all contacts](/api-reference/contacts/list) API.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Contact deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contact_delete_response'
 components:
   parameters:
     api_key_header:
       in: header
       name: X-Api-Key
-      description: API key. See [Authentication](/getting-started/authentication).
+      description: X-Api-Key is used to authenticate requests using an API key. Provide your API key in this header to access protected endpoints. Refer to [Authentication](/getting-started/authentication) for more information.
       required: true
       schema:
         type: string
     page_number_param:
       in: query
       name: page_number
-      description: Page number. Omit to return all results.
+      description: Retrieve paginated results by specifying the desired page number. If this parameter is absent, all results will be returned.
       required: false
       schema:
         type: integer
     page_size_param:
       in: query
       name: page_size
-      description: Number of results per page. Defaults to 30.
+      description: Set the number of results returned in the response. Defaulting to 30 when omitted.
       required: false
       schema:
         type: integer
@@ -239,3 +306,10 @@ components:
           company:
             id: null
             name: null
+    contact_delete_response:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        message: Contact deleted successfully

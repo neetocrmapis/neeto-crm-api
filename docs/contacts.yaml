@@ -48,3 +48,71 @@ paths:
             application/json:
               schema:
                 $ref: '../schemas/contact.yaml#/components/schemas/contact_response'
+
+  /contacts/{id}:
+    get:
+      summary: Get a contact
+      tags:
+        - Contacts
+      description: Retrieve a single contact by its ID.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the contact to retrieve. You can get the contact `id` by listing all contacts using our [List all contacts](/api-reference/contacts/list) API.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the contact.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/contact.yaml#/components/schemas/contact_response'
+    patch:
+      summary: Update a contact
+      tags:
+        - Contacts
+      description: Update an existing contact by its ID.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the contact to update. You can get the contact `id` by listing all contacts using our [List all contacts](/api-reference/contacts/list) API.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/contact.yaml#/components/schemas/contact_request'
+      responses:
+        '200':
+          description: Contact updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/contact.yaml#/components/schemas/contact_response'
+    delete:
+      summary: Delete a contact
+      tags:
+        - Contacts
+      description: Delete a contact by its ID.
+      parameters:
+        - $ref: '../schemas/common.yaml#/api_key_header'
+        - name: id
+          in: path
+          required: true
+          description: The ID of the contact to delete. You can get the contact `id` by listing all contacts using our [List all contacts](/api-reference/contacts/list) API.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Contact deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/contact.yaml#/components/schemas/contact_delete_response'
