@@ -101,6 +101,36 @@
           "api-reference/team-members/update",
           "api-reference/team-members/remove"
         ]
+      },
+      {
+        "group": "API v1 (Deprecated)",
+        "icon": "clock-rotate-left",
+        "pages": [
+          "api-reference-v1/contacts/list",
+          "api-reference-v1/contacts/create",
+          "api-reference-v1/contacts/get",
+          "api-reference-v1/contacts/update",
+          "api-reference-v1/contacts/delete",
+          "api-reference-v1/companies/list",
+          "api-reference-v1/companies/create",
+          "api-reference-v1/companies/get",
+          "api-reference-v1/companies/update",
+          "api-reference-v1/companies/delete",
+          "api-reference-v1/deals/list",
+          "api-reference-v1/deals/create",
+          "api-reference-v1/deals/get",
+          "api-reference-v1/deals/update",
+          "api-reference-v1/deals/delete",
+          "api-reference-v1/leads/list",
+          "api-reference-v1/leads/create",
+          "api-reference-v1/leads/get",
+          "api-reference-v1/leads/update",
+          "api-reference-v1/leads/delete",
+          "api-reference-v1/team-members/list",
+          "api-reference-v1/team-members/add",
+          "api-reference-v1/team-members/update",
+          "api-reference-v1/team-members/remove"
+        ]
       }
     ]
   },

@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: NeetoCRM Leads APIs
-  version: 2.0.0
+  version: 1.0.0
 
 servers:
   $ref: '../schemas/common.yaml#/servers'
@@ -110,5 +110,9 @@ paths:
           schema:
             type: string
       responses:
-        '204':
+        '200':
           description: Lead deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/lead.yaml#/components/schemas/lead_delete_response'

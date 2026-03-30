@@ -1,40 +1,40 @@
 openapi: 3.0.3
 info:
-  title: NeetoCRM Leads APIs
-  version: 2.0.0
+  title: NeetoCRM Contacts APIs
+  version: 1.0.0
 servers:
   - description: NeetoCRM APIs
-    url: https://{your-subdomain}.neetocrm.com/api/external/v2
+    url: https://{your-subdomain}.neetocrm.com/api/external/v1
     variables:
       your-subdomain:
         default: spinkart
         description: Replace **spinkart** with your [workspace's subdomain](/getting-started/identifying-subdomain).
 tags:
-  - name: Leads
-    description: APIs to manage leads in your workspace.
+  - name: Contacts
+    description: APIs to manage contacts in your workspace.
 paths:
-  /leads:
+  /contacts:
     get:
-      summary: List all leads
+      summary: List all contacts
       tags:
-        - Leads
-      description: Retrieve a list of all leads in your workspace. Results are ordered by creation date (newest first).
+        - Contacts
+      description: Retrieve a list of all contacts in your workspace. Results are ordered by creation date (newest first).
       parameters:
         - $ref: '#/components/parameters/api_key_header'
         - $ref: '#/components/parameters/page_number_param'
         - $ref: '#/components/parameters/page_size_param'
       responses:
         '200':
-          description: Successfully retrieved leads.
+          description: Successfully retrieved contacts.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/lead_list_response'
+                $ref: '#/components/schemas/contact_list_response'
     post:
-      summary: Create a lead
+      summary: Create a contact
       tags:
-        - Leads
-      description: Create a new lead in your workspace.
+        - Contacts
+      description: Create a new contact in your workspace.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
       requestBody:
@@ -42,46 +42,46 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/lead_request'
+              $ref: '#/components/schemas/contact_request'
       responses:
         '201':
-          description: Lead created successfully.
+          description: Contact created successfully.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/lead_response'
-  /leads/{id}:
+                $ref: '#/components/schemas/contact_response'
+  /contacts/{id}:
     get:
-      summary: Get a lead
+      summary: Get a contact
       tags:
-        - Leads
-      description: Retrieve a single lead by its ID.
+        - Contacts
+      description: Retrieve a single contact by its ID.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
         - name: id
           in: path
           required: true
-          description: The ID of the lead to retrieve. You can get the lead `id` by listing all leads using our [List all leads](/api-reference/leads/list) API.
+          description: The ID of the contact to retrieve. You can get the contact `id` by listing all contacts using our [List all contacts](/api-reference/contacts/list) API.
           schema:
             type: string
       responses:
         '200':
-          description: Successfully retrieved the lead.
+          description: Successfully retrieved the contact.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/lead_response'
+                $ref: '#/components/schemas/contact_response'
     patch:
-      summary: Update a lead
+      summary: Update a contact
       tags:
-        - Leads
-      description: Update an existing lead by its ID.
+        - Contacts
+      description: Update an existing contact by its ID.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
         - name: id
           in: path
           required: true
-          description: The ID of the lead to update. You can get the lead `id` by listing all leads using our [List all leads](/api-reference/leads/list) API.
+          description: The ID of the contact to update. You can get the contact `id` by listing all contacts using our [List all contacts](/api-reference/contacts/list) API.
           schema:
             type: string
       requestBody:
@@ -89,30 +89,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/lead_request'
+              $ref: '#/components/schemas/contact_request'
       responses:
         '200':
-          description: Lead updated successfully.
+          description: Contact updated successfully.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/lead_response'
+                $ref: '#/components/schemas/contact_response'
     delete:
-      summary: Delete a lead
+      summary: Delete a contact
       tags:
-        - Leads
-      description: Delete a lead by its ID.
+        - Contacts
+      description: Delete a contact by its ID.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
         - name: id
           in: path
           required: true
-          description: The ID of the lead to delete. You can get the lead `id` by listing all leads using our [List all leads](/api-reference/leads/list) API.
+          description: The ID of the contact to delete. You can get the contact `id` by listing all contacts using our [List all contacts](/api-reference/contacts/list) API.
           schema:
             type: string
       responses:
-        '204':
-          description: Lead deleted successfully.
+        '200':
+          description: Contact deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contact_delete_response'
 components:
   parameters:
     api_key_header:
@@ -137,56 +141,32 @@ components:
       schema:
         type: integer
   schemas:
-    tag:
+    contact:
       type: object
       properties:
         id:
           type: string
-          description: Unique identifier for the tag.
+          description: Unique identifier for the contact.
         name:
           type: string
-          description: Name of the tag.
-        style:
-          type: string
-          description: Style/color of the tag.
-    lead:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the lead.
-        name:
-          type: string
-          description: Name of the lead.
-        status:
-          type: string
-          enum:
-            - open
-            - converted
-            - archived
-          description: Current status of the lead.
-        unique_number:
-          type: string
-          description: Auto-generated unique number for the lead.
+          description: Name of the contact.
         email:
           type: string
           nullable: true
-          description: Email address of the lead (from associated contact).
+          description: Email address of the contact.
         phone_number:
           type: string
           nullable: true
-          description: Phone number of the lead (from associated contact).
-        contact:
-          type: object
+          description: Phone number of the contact.
+        owner:
+          type: string
           nullable: true
-          description: Associated contact.
-          properties:
-            id:
-              type: string
-              description: Unique identifier of the contact.
-            name:
-              type: string
-              description: Name of the contact.
+          description: Owner of the contact.
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags associated with the contact.
         company:
           type: object
           nullable: true
@@ -198,23 +178,14 @@ components:
             name:
               type: string
               description: Name of the company.
-        owner:
-          type: string
-          nullable: true
-          description: Owner of the lead.
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/tag'
-          description: Tags associated with the lead.
         created_at:
           type: string
           format: date-time
-          description: Timestamp when the lead was created.
+          description: Timestamp when the contact was created.
         updated_at:
           type: string
           format: date-time
-          description: Timestamp when the lead was last updated.
+          description: Timestamp when the contact was last updated.
     pagination:
       type: object
       properties:
@@ -230,75 +201,69 @@ components:
         page_size:
           type: integer
           description: Number of records per page.
-    lead_list_response:
+    contact_list_response:
       type: object
       properties:
-        leads:
+        contacts:
           type: array
           items:
-            $ref: '#/components/schemas/lead'
-          description: List of leads.
+            $ref: '#/components/schemas/contact'
+          description: List of contacts.
         pagination:
           $ref: '#/components/schemas/pagination'
       example:
-        leads:
+        contacts:
           - id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
             name: Eve
-            status: open
-            unique_number: L-001
             email: eve@example.com
             phone_number: ''
-            contact:
-              id: null
-              name: Eve
+            created_at: '2025-03-15T10:30:00.000Z'
+            updated_at: '2025-03-15T10:30:00.000Z'
+            owner: null
+            tags: []
             company:
               id: null
               name: null
-            owner: null
-            tags: []
-            created_at: '2025-03-15T10:30:00.000Z'
-            updated_at: '2025-03-15T10:30:00.000Z'
           - id: b2c3d4e5-f6a7-8901-bcde-f12345678901
             name: Oliver
-            status: converted
-            unique_number: L-002
             email: oliver@example.com
             phone_number: '+1555123456'
-            contact:
-              id: c1d2e3f4-a5b6-7890-cdef-123456789012
-              name: Oliver
-            company:
-              id: d2e3f4a5-b6c7-8901-def0-234567890123
-              name: Oliver Industries
-            owner: null
-            tags: []
             created_at: '2025-03-14T14:22:00.000Z'
             updated_at: '2025-03-14T14:22:00.000Z'
+            owner: null
+            tags: []
+            company:
+              id: null
+              name: null
         pagination:
           total_records: 42
           total_pages: 2
           current_page_number: 1
           page_size: 30
-    lead_request:
+    contact_request:
       type: object
       properties:
-        lead:
+        contact:
           type: object
           required:
             - name
           properties:
             name:
               type: string
-              description: Lead name.
+              description: Contact name.
               example: Eve
-            status:
+            email:
               type: string
-              enum:
-                - open
-                - converted
-                - archived
-              description: Lead status.
-              example: open
+              description: Email address.
+              example: eve@example.com
+            phone_number:
+              type: string
+              description: Phone number.
+              example: '+1234567890'
+            company_id:
+              type: string
+              description: Unique identifier of the associated company.
+              example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
             owner_id:
               type: string
               description: Unique identifier of the owner.
@@ -311,26 +276,40 @@ components:
               example:
                 - a1b2c3d4-e5f6-7890-abcd-ef1234567890
                 - b2c3d4e5-f6a7-8901-bcde-f12345678901
-    lead_response:
+            field_values_attributes:
+              type: array
+              description: Custom field values.
+              items:
+                type: object
+                properties:
+                  field_id:
+                    type: string
+                    description: Unique identifier of the custom field.
+                  value:
+                    type: string
+                    description: Value for the custom field.
+    contact_response:
       type: object
       properties:
-        lead:
-          $ref: '#/components/schemas/lead'
+        contact:
+          $ref: '#/components/schemas/contact'
       example:
-        lead:
+        contact:
           id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
           name: Eve
-          status: open
-          unique_number: L-001
           email: eve@example.com
           phone_number: ''
-          contact:
-            id: null
-            name: Eve
+          created_at: '2025-03-15T10:30:00.000Z'
+          updated_at: '2025-03-15T10:30:00.000Z'
+          owner: null
+          tags: []
           company:
             id: null
             name: null
-          owner: null
-          tags: []
-          created_at: '2025-03-15T10:30:00.000Z'
-          updated_at: '2025-03-15T10:30:00.000Z'
+    contact_delete_response:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        message: Contact deleted successfully

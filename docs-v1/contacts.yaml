@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: NeetoCRM Contacts APIs
-  version: 2.0.0
+  version: 1.0.0
 
 servers:
   $ref: '../schemas/common.yaml#/servers'
@@ -110,5 +110,9 @@ paths:
           schema:
             type: string
       responses:
-        '204':
+        '200':
           description: Contact deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/contact.yaml#/components/schemas/contact_delete_response'
