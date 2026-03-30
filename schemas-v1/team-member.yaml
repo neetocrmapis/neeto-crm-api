@@ -33,4 +33,4 @@ components:
               items:
                 $ref: '#/components/schemas/team_member'
             pagination:
-              $ref: '../schemas/common.yaml#/components/schemas/pagination'
+              $ref: '../schemas-v1/common.yaml#/components/schemas/pagination'

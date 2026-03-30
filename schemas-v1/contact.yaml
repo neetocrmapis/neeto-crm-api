@@ -105,7 +105,7 @@ components:
             $ref: "#/components/schemas/contact"
           description: List of contacts.
         pagination:
-          $ref: "../schemas/common.yaml#/components/schemas/pagination"
+          $ref: "../schemas-v1/common.yaml#/components/schemas/pagination"
       example:
         contacts:
           - id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
