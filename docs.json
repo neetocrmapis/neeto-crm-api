@@ -91,6 +91,16 @@
           "api-reference/leads/update",
           "api-reference/leads/delete"
         ]
+      },
+      {
+        "group": "Team Members",
+        "icon": "user-group",
+        "pages": [
+          "api-reference/team-members/list",
+          "api-reference/team-members/add",
+          "api-reference/team-members/update",
+          "api-reference/team-members/remove"
+        ]
       }
     ]
   },
