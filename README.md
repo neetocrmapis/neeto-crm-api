@@ -1,38 +1,40 @@
-# NeetoCRM API Documentation
+# NeetoRecord API Docs
 
-This is the API documentation repository for NeetoCRM. The documentation is built with [Mintlify](https://mintlify.com/).
+This repository contains the documentation for the [NeetoRecord APIs](https://apidocs.neetorecord.com/getting-started/introduction), built using [Mintlify](https://mintlify.com/).
 
-## Getting Started
+## Development Setup
 
-### Installation
+1. ### Install Mintlify CLI globally
 
-```bash
-yarn install
-```
+   ```bash
+   npm i -g mint
+   ```
 
-### Development
+2. ### Install project dependencies
 
-To preview the documentation locally:
+   ```bash
+   yarn install
+   ```
 
-```bash
-yarn docs:preview
-```
+3. ### Make code changes in docs folder
 
-### Building
+4. ### Preview the changes
 
-To bundle the OpenAPI specs:
+   ```bash
+   yarn docs:preview
+   ```
 
-```bash
-yarn build:dev
-```
+   A local preview will be available at `http://localhost:3000`. You can customize the port using the `--port` flag:
 
-## Contributing
+   ```bash
+   yarn docs:preview --port 3333
+   ```
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
+   DO NOT MAKE CODE CHANGES IN BUNDLED FOLDER.
 
-## License
+5. ### Build the API
 
-MIT
+   After making code changes you must run `yarn build:dev`. This will make changes in the `bundled` folder which is what mintlify uses.
+   You should NEVER make changes to the `bundled` folder directly.
+
+   Refer to [llm.md](llm.md) for more info.
