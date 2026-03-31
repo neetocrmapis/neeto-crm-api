@@ -60,7 +60,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: The ID of the company to retrieve. You can get the company `id` by listing all companies using our [List all companies](/api-reference/companies/list) API.
+          description: The ID of the company to retrieve. You can get the company `id` by listing all companies using our [List all companies](/api-reference-v1/companies/list) API.
           schema:
             type: string
       responses:
@@ -80,7 +80,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: The ID of the company to update. You can get the company `id` by listing all companies using our [List all companies](/api-reference/companies/list) API.
+          description: The ID of the company to update. You can get the company `id` by listing all companies using our [List all companies](/api-reference-v1/companies/list) API.
           schema:
             type: string
       requestBody:
@@ -106,7 +106,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: The ID of the company to delete. You can get the company `id` by listing all companies using our [List all companies](/api-reference/companies/list) API.
+          description: The ID of the company to delete. You can get the company `id` by listing all companies using our [List all companies](/api-reference-v1/companies/list) API.
           schema:
             type: string
       responses:

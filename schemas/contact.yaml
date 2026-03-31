@@ -155,12 +155,3 @@ components:
           company:
             id: null
             name: null
-
-    # Delete response
-    contact_delete_response:
-      type: object
-      properties:
-        message:
-          type: string
-      example:
-        message: "Contact deleted successfully"

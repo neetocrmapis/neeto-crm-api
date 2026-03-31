@@ -61,7 +61,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: The ID of the contact to retrieve. You can get the contact `id` by listing all contacts using our [List all contacts](/api-reference/contacts/list) API.
+          description: The ID of the contact to retrieve. You can get the contact `id` by listing all contacts using our [List all contacts](/api-reference-v1/contacts/list) API.
           schema:
             type: string
       responses:
@@ -81,7 +81,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: The ID of the contact to update. You can get the contact `id` by listing all contacts using our [List all contacts](/api-reference/contacts/list) API.
+          description: The ID of the contact to update. You can get the contact `id` by listing all contacts using our [List all contacts](/api-reference-v1/contacts/list) API.
           schema:
             type: string
       requestBody:
@@ -107,7 +107,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: The ID of the contact to delete. You can get the contact `id` by listing all contacts using our [List all contacts](/api-reference/contacts/list) API.
+          description: The ID of the contact to delete. You can get the contact `id` by listing all contacts using our [List all contacts](/api-reference-v1/contacts/list) API.
           schema:
             type: string
       responses:

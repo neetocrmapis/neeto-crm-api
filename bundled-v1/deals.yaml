@@ -61,7 +61,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: The ID of the deal to retrieve. You can get the deal `id` by listing all deals using our [List all deals](/api-reference/deals/list) API.
+          description: The ID of the deal to retrieve. You can get the deal `id` by listing all deals using our [List all deals](/api-reference-v1/deals/list) API.
           schema:
             type: string
       responses:
@@ -81,7 +81,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: The ID of the deal to update. You can get the deal `id` by listing all deals using our [List all deals](/api-reference/deals/list) API.
+          description: The ID of the deal to update. You can get the deal `id` by listing all deals using our [List all deals](/api-reference-v1/deals/list) API.
           schema:
             type: string
       requestBody:
@@ -107,7 +107,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: The ID of the deal to delete. You can get the deal `id` by listing all deals using our [List all deals](/api-reference/deals/list) API.
+          description: The ID of the deal to delete. You can get the deal `id` by listing all deals using our [List all deals](/api-reference-v1/deals/list) API.
           schema:
             type: string
       responses:

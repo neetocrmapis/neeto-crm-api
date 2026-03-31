@@ -60,7 +60,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: The ID of the lead to retrieve. You can get the lead `id` by listing all leads using our [List all leads](/api-reference/leads/list) API.
+          description: The ID of the lead to retrieve. You can get the lead `id` by listing all leads using our [List all leads](/api-reference-v1/leads/list) API.
           schema:
             type: string
       responses:
@@ -80,7 +80,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: The ID of the lead to update. You can get the lead `id` by listing all leads using our [List all leads](/api-reference/leads/list) API.
+          description: The ID of the lead to update. You can get the lead `id` by listing all leads using our [List all leads](/api-reference-v1/leads/list) API.
           schema:
             type: string
       requestBody:
@@ -106,7 +106,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: The ID of the lead to delete. You can get the lead `id` by listing all leads using our [List all leads](/api-reference/leads/list) API.
+          description: The ID of the lead to delete. You can get the lead `id` by listing all leads using our [List all leads](/api-reference-v1/leads/list) API.
           schema:
             type: string
       responses:
