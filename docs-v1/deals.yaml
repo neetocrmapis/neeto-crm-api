@@ -1,10 +1,10 @@
 openapi: 3.0.3
 info:
   title: NeetoCRM Deals APIs
-  version: 2.0.0
+  version: 1.0.0
 
 servers:
-  $ref: '../schemas/common.yaml#/servers'
+  $ref: '../schemas-v1/common.yaml#/servers'
 
 tags:
   - name: Deals
@@ -18,36 +18,36 @@ paths:
         - Deals
       description: Retrieve a list of all deals in your workspace. Results are ordered by creation date (newest first).
       parameters:
-        - $ref: '../schemas/common.yaml#/api_key_header'
-        - $ref: '../schemas/common.yaml#/page_number_param'
-        - $ref: '../schemas/common.yaml#/page_size_param'
+        - $ref: '../schemas-v1/common.yaml#/api_key_header'
+        - $ref: '../schemas-v1/common.yaml#/page_number_param'
+        - $ref: '../schemas-v1/common.yaml#/page_size_param'
       responses:
         '200':
           description: Successfully retrieved deals.
           content:
             application/json:
               schema:
-                $ref: '../schemas/deal.yaml#/components/schemas/deal_list_response'
+                $ref: '../schemas-v1/deal.yaml#/components/schemas/deal_list_response'
     post:
       summary: Create a deal
       tags:
         - Deals
       description: Create a new deal in your workspace.
       parameters:
-        - $ref: '../schemas/common.yaml#/api_key_header'
+        - $ref: '../schemas-v1/common.yaml#/api_key_header'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '../schemas/deal.yaml#/components/schemas/deal_request'
+              $ref: '../schemas-v1/deal.yaml#/components/schemas/deal_request'
       responses:
         '201':
           description: Deal created successfully.
           content:
             application/json:
               schema:
-                $ref: '../schemas/deal.yaml#/components/schemas/deal_response'
+                $ref: '../schemas-v1/deal.yaml#/components/schemas/deal_response'
 
   /deals/{id}:
     get:
@@ -56,11 +56,11 @@ paths:
         - Deals
       description: Retrieve a single deal by its ID.
       parameters:
-        - $ref: '../schemas/common.yaml#/api_key_header'
+        - $ref: '../schemas-v1/common.yaml#/api_key_header'
         - name: id
           in: path
           required: true
-          description: The ID of the deal to retrieve. You can get the deal `id` by listing all deals using our [List all deals](/api-reference/deals/list) API.
+          description: The ID of the deal to retrieve. You can get the deal `id` by listing all deals using our [List all deals](/api-reference-v1/deals/list) API.
           schema:
             type: string
       responses:
@@ -69,18 +69,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '../schemas/deal.yaml#/components/schemas/deal_response'
+                $ref: '../schemas-v1/deal.yaml#/components/schemas/deal_response'
     patch:
       summary: Update a deal
       tags:
         - Deals
       description: Update an existing deal by its ID.
       parameters:
-        - $ref: '../schemas/common.yaml#/api_key_header'
+        - $ref: '../schemas-v1/common.yaml#/api_key_header'
         - name: id
           in: path
           required: true
-          description: The ID of the deal to update. You can get the deal `id` by listing all deals using our [List all deals](/api-reference/deals/list) API.
+          description: The ID of the deal to update. You can get the deal `id` by listing all deals using our [List all deals](/api-reference-v1/deals/list) API.
           schema:
             type: string
       requestBody:
@@ -88,27 +88,31 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '../schemas/deal.yaml#/components/schemas/deal_request'
+              $ref: '../schemas-v1/deal.yaml#/components/schemas/deal_request'
       responses:
         '200':
           description: Deal updated successfully.
           content:
             application/json:
               schema:
-                $ref: '../schemas/deal.yaml#/components/schemas/deal_response'
+                $ref: '../schemas-v1/deal.yaml#/components/schemas/deal_response'
     delete:
       summary: Delete a deal
       tags:
         - Deals
       description: Delete a deal by its ID.
       parameters:
-        - $ref: '../schemas/common.yaml#/api_key_header'
+        - $ref: '../schemas-v1/common.yaml#/api_key_header'
         - name: id
           in: path
           required: true
-          description: The ID of the deal to delete. You can get the deal `id` by listing all deals using our [List all deals](/api-reference/deals/list) API.
+          description: The ID of the deal to delete. You can get the deal `id` by listing all deals using our [List all deals](/api-reference-v1/deals/list) API.
           schema:
             type: string
       responses:
-        '204':
+        '200':
           description: Deal deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas-v1/deal.yaml#/components/schemas/deal_delete_response'

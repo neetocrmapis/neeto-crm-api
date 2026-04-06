@@ -1,40 +1,40 @@
 openapi: 3.0.3
 info:
-  title: NeetoCRM Leads APIs
-  version: 2.0.0
+  title: NeetoCRM Deals APIs
+  version: 1.0.0
 servers:
   - description: NeetoCRM APIs
-    url: https://{your-subdomain}.neetocrm.com/api/external/v2
+    url: https://{your-subdomain}.neetocrm.com/api/external/v1
     variables:
       your-subdomain:
         default: spinkart
         description: Replace **spinkart** with your [workspace's subdomain](/getting-started/identifying-subdomain).
 tags:
-  - name: Leads
-    description: APIs to manage leads in your workspace.
+  - name: Deals
+    description: APIs to manage deals in your workspace.
 paths:
-  /leads:
+  /deals:
     get:
-      summary: List all leads
+      summary: List all deals
       tags:
-        - Leads
-      description: Retrieve a list of all leads in your workspace. Results are ordered by creation date (newest first).
+        - Deals
+      description: Retrieve a list of all deals in your workspace. Results are ordered by creation date (newest first).
       parameters:
         - $ref: '#/components/parameters/api_key_header'
         - $ref: '#/components/parameters/page_number_param'
         - $ref: '#/components/parameters/page_size_param'
       responses:
         '200':
-          description: Successfully retrieved leads.
+          description: Successfully retrieved deals.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/lead_list_response'
+                $ref: '#/components/schemas/deal_list_response'
     post:
-      summary: Create a lead
+      summary: Create a deal
       tags:
-        - Leads
-      description: Create a new lead in your workspace.
+        - Deals
+      description: Create a new deal in your workspace.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
       requestBody:
@@ -42,46 +42,46 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/lead_request'
+              $ref: '#/components/schemas/deal_request'
       responses:
         '201':
-          description: Lead created successfully.
+          description: Deal created successfully.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/lead_response'
-  /leads/{id}:
+                $ref: '#/components/schemas/deal_response'
+  /deals/{id}:
     get:
-      summary: Get a lead
+      summary: Get a deal
       tags:
-        - Leads
-      description: Retrieve a single lead by its ID.
+        - Deals
+      description: Retrieve a single deal by its ID.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
         - name: id
           in: path
           required: true
-          description: The ID of the lead to retrieve. You can get the lead `id` by listing all leads using our [List all leads](/api-reference/leads/list) API.
+          description: The ID of the deal to retrieve. You can get the deal `id` by listing all deals using our [List all deals](/api-reference-v1/deals/list) API.
           schema:
             type: string
       responses:
         '200':
-          description: Successfully retrieved the lead.
+          description: Successfully retrieved the deal.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/lead_response'
+                $ref: '#/components/schemas/deal_response'
     patch:
-      summary: Update a lead
+      summary: Update a deal
       tags:
-        - Leads
-      description: Update an existing lead by its ID.
+        - Deals
+      description: Update an existing deal by its ID.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
         - name: id
           in: path
           required: true
-          description: The ID of the lead to update. You can get the lead `id` by listing all leads using our [List all leads](/api-reference/leads/list) API.
+          description: The ID of the deal to update. You can get the deal `id` by listing all deals using our [List all deals](/api-reference-v1/deals/list) API.
           schema:
             type: string
       requestBody:
@@ -89,30 +89,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/lead_request'
+              $ref: '#/components/schemas/deal_request'
       responses:
         '200':
-          description: Lead updated successfully.
+          description: Deal updated successfully.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/lead_response'
+                $ref: '#/components/schemas/deal_response'
     delete:
-      summary: Delete a lead
+      summary: Delete a deal
       tags:
-        - Leads
-      description: Delete a lead by its ID.
+        - Deals
+      description: Delete a deal by its ID.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
         - name: id
           in: path
           required: true
-          description: The ID of the lead to delete. You can get the lead `id` by listing all leads using our [List all leads](/api-reference/leads/list) API.
+          description: The ID of the deal to delete. You can get the deal `id` by listing all deals using our [List all deals](/api-reference-v1/deals/list) API.
           schema:
             type: string
       responses:
-        '204':
-          description: Lead deleted successfully.
+        '200':
+          description: Deal deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/deal_delete_response'
 components:
   parameters:
     api_key_header:
@@ -149,33 +153,34 @@ components:
         style:
           type: string
           description: Style/color of the tag.
-    lead:
+    deal:
       type: object
       properties:
         id:
           type: string
-          description: Unique identifier for the lead.
+          description: Unique identifier for the deal.
         name:
           type: string
-          description: Name of the lead.
+          description: Name of the deal.
         status:
           type: string
           enum:
-            - open
-            - converted
-            - archived
-          description: Current status of the lead.
+            - in_progress
+            - won
+            - lost
+          description: Current status of the deal.
+        value:
+          type: number
+          description: Monetary value of the deal.
+        currency:
+          type: string
+          description: Currency code for the deal value.
+        price:
+          type: string
+          description: Formatted price string (e.g. "$ 10000").
         unique_number:
           type: string
-          description: Auto-generated unique number for the lead.
-        email:
-          type: string
-          nullable: true
-          description: Email address of the lead (from associated contact).
-        phone_number:
-          type: string
-          nullable: true
-          description: Phone number of the lead (from associated contact).
+          description: Auto-generated unique number for the deal.
         contact:
           type: object
           nullable: true
@@ -201,20 +206,42 @@ components:
         owner:
           type: string
           nullable: true
-          description: Owner of the lead.
+          description: Owner of the deal.
+        pipeline:
+          type: object
+          nullable: true
+          description: Pipeline the deal belongs to.
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the pipeline.
+            name:
+              type: string
+              description: Name of the pipeline.
+        stage:
+          type: object
+          nullable: true
+          description: Current stage of the deal within the pipeline.
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the stage.
+            name:
+              type: string
+              description: Name of the stage.
         tags:
           type: array
           items:
             $ref: '#/components/schemas/tag'
-          description: Tags associated with the lead.
+          description: Tags associated with the deal.
         created_at:
           type: string
           format: date-time
-          description: Timestamp when the lead was created.
+          description: Timestamp when the deal was created.
         updated_at:
           type: string
           format: date-time
-          description: Timestamp when the lead was last updated.
+          description: Timestamp when the deal was last updated.
     pagination:
       type: object
       properties:
@@ -230,79 +257,82 @@ components:
         page_size:
           type: integer
           description: Number of records per page.
-    lead_list_response:
+    deal_list_response:
       type: object
       properties:
-        leads:
+        deals:
           type: array
           items:
-            $ref: '#/components/schemas/lead'
-          description: List of leads.
+            $ref: '#/components/schemas/deal'
+          description: List of deals.
         pagination:
           $ref: '#/components/schemas/pagination'
       example:
-        leads:
+        deals:
           - id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-            name: Eve
-            status: open
-            unique_number: L-001
-            email: eve@example.com
-            phone_number: ''
+            name: Eve Enterprise Deal
+            status: in_progress
+            value: 10000
+            currency: USD
+            price: $ 10000
+            unique_number: D-001
             contact:
-              id: null
+              id: c1d2e3f4-a5b6-7890-cdef-123456789012
               name: Eve
             company:
-              id: null
-              name: null
+              id: d2e3f4a5-b6c7-8901-def0-234567890123
+              name: Eve Corp
             owner: null
+            pipeline: null
+            stage: null
             tags: []
             created_at: '2025-03-15T10:30:00.000Z'
             updated_at: '2025-03-15T10:30:00.000Z'
-          - id: b2c3d4e5-f6a7-8901-bcde-f12345678901
-            name: Oliver
-            status: converted
-            unique_number: L-002
-            email: oliver@example.com
-            phone_number: '+1555123456'
-            contact:
-              id: c1d2e3f4-a5b6-7890-cdef-123456789012
-              name: Oliver
-            company:
-              id: d2e3f4a5-b6c7-8901-def0-234567890123
-              name: Oliver Industries
-            owner: null
-            tags: []
-            created_at: '2025-03-14T14:22:00.000Z'
-            updated_at: '2025-03-14T14:22:00.000Z'
         pagination:
           total_records: 42
-          total_pages: 2
+          total_pages: 1
           current_page_number: 1
           page_size: 30
-    lead_request:
+    deal_request:
       type: object
       properties:
-        lead:
+        deal:
           type: object
           required:
             - name
           properties:
             name:
               type: string
-              description: Lead name.
-              example: Eve
+              description: Deal name.
+              example: Eve Enterprise Deal
+            value:
+              type: number
+              description: Monetary value of the deal.
+              example: 10000
             status:
               type: string
               enum:
-                - open
-                - converted
-                - archived
-              description: Lead status.
-              example: open
+                - in_progress
+                - won
+                - lost
+              description: Deal status.
+              example: in_progress
             owner_id:
               type: string
               description: Unique identifier of the owner.
               example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+            stage_id:
+              type: string
+              description: Stage ID.
+              example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+            pipeline_id:
+              type: string
+              description: Pipeline ID.
+              example: b2c3d4e5-f6a7-8901-bcde-f12345678901
+            position:
+              type: integer
+              description: Position in pipeline.
+              example: 1
             tag_ids:
               type: array
               items:
@@ -311,26 +341,36 @@ components:
               example:
                 - a1b2c3d4-e5f6-7890-abcd-ef1234567890
                 - b2c3d4e5-f6a7-8901-bcde-f12345678901
-    lead_response:
+    deal_response:
       type: object
       properties:
-        lead:
-          $ref: '#/components/schemas/lead'
+        deal:
+          $ref: '#/components/schemas/deal'
       example:
-        lead:
+        deal:
           id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-          name: Eve
-          status: open
-          unique_number: L-001
-          email: eve@example.com
-          phone_number: ''
+          name: Eve Enterprise Deal
+          status: in_progress
+          value: 10000
+          currency: USD
+          price: $ 10000
+          unique_number: D-001
           contact:
-            id: null
+            id: c1d2e3f4-a5b6-7890-cdef-123456789012
             name: Eve
           company:
-            id: null
-            name: null
+            id: d2e3f4a5-b6c7-8901-def0-234567890123
+            name: Eve Corp
           owner: null
+          pipeline: null
+          stage: null
           tags: []
           created_at: '2025-03-15T10:30:00.000Z'
           updated_at: '2025-03-15T10:30:00.000Z'
+    deal_delete_response:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        message: Deal deleted successfully

@@ -1,40 +1,40 @@
 openapi: 3.0.3
 info:
-  title: NeetoCRM Leads APIs
-  version: 2.0.0
+  title: NeetoCRM Companies APIs
+  version: 1.0.0
 servers:
   - description: NeetoCRM APIs
-    url: https://{your-subdomain}.neetocrm.com/api/external/v2
+    url: https://{your-subdomain}.neetocrm.com/api/external/v1
     variables:
       your-subdomain:
         default: spinkart
         description: Replace **spinkart** with your [workspace's subdomain](/getting-started/identifying-subdomain).
 tags:
-  - name: Leads
-    description: APIs to manage leads in your workspace.
+  - name: Companies
+    description: APIs to manage companies in your workspace.
 paths:
-  /leads:
+  /companies:
     get:
-      summary: List all leads
+      summary: List all companies
       tags:
-        - Leads
-      description: Retrieve a list of all leads in your workspace. Results are ordered by creation date (newest first).
+        - Companies
+      description: Retrieve a list of all companies in your workspace. Results are ordered by creation date (newest first).
       parameters:
         - $ref: '#/components/parameters/api_key_header'
         - $ref: '#/components/parameters/page_number_param'
         - $ref: '#/components/parameters/page_size_param'
       responses:
         '200':
-          description: Successfully retrieved leads.
+          description: Successfully retrieved companies.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/lead_list_response'
+                $ref: '#/components/schemas/company_list_response'
     post:
-      summary: Create a lead
+      summary: Create a company
       tags:
-        - Leads
-      description: Create a new lead in your workspace.
+        - Companies
+      description: Create a new company in your workspace.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
       requestBody:
@@ -42,46 +42,46 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/lead_request'
+              $ref: '#/components/schemas/company_request'
       responses:
         '201':
-          description: Lead created successfully.
+          description: Company created successfully.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/lead_response'
-  /leads/{id}:
+                $ref: '#/components/schemas/company_response'
+  /companies/{id}:
     get:
-      summary: Get a lead
+      summary: Get a company
       tags:
-        - Leads
-      description: Retrieve a single lead by its ID.
+        - Companies
+      description: Retrieve a single company by its ID.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
         - name: id
           in: path
           required: true
-          description: The ID of the lead to retrieve. You can get the lead `id` by listing all leads using our [List all leads](/api-reference/leads/list) API.
+          description: The ID of the company to retrieve. You can get the company `id` by listing all companies using our [List all companies](/api-reference-v1/companies/list) API.
           schema:
             type: string
       responses:
         '200':
-          description: Successfully retrieved the lead.
+          description: Successfully retrieved the company.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/lead_response'
+                $ref: '#/components/schemas/company_response'
     patch:
-      summary: Update a lead
+      summary: Update a company
       tags:
-        - Leads
-      description: Update an existing lead by its ID.
+        - Companies
+      description: Update an existing company by its ID.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
         - name: id
           in: path
           required: true
-          description: The ID of the lead to update. You can get the lead `id` by listing all leads using our [List all leads](/api-reference/leads/list) API.
+          description: The ID of the company to update. You can get the company `id` by listing all companies using our [List all companies](/api-reference-v1/companies/list) API.
           schema:
             type: string
       requestBody:
@@ -89,30 +89,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/lead_request'
+              $ref: '#/components/schemas/company_request'
       responses:
         '200':
-          description: Lead updated successfully.
+          description: Company updated successfully.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/lead_response'
+                $ref: '#/components/schemas/company_response'
     delete:
-      summary: Delete a lead
+      summary: Delete a company
       tags:
-        - Leads
-      description: Delete a lead by its ID.
+        - Companies
+      description: Delete a company by its ID.
       parameters:
         - $ref: '#/components/parameters/api_key_header'
         - name: id
           in: path
           required: true
-          description: The ID of the lead to delete. You can get the lead `id` by listing all leads using our [List all leads](/api-reference/leads/list) API.
+          description: The ID of the company to delete. You can get the company `id` by listing all companies using our [List all companies](/api-reference-v1/companies/list) API.
           schema:
             type: string
       responses:
-        '204':
-          description: Lead deleted successfully.
+        '200':
+          description: Company deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/company_delete_response'
 components:
   parameters:
     api_key_header:
@@ -149,72 +153,36 @@ components:
         style:
           type: string
           description: Style/color of the tag.
-    lead:
+    company:
       type: object
       properties:
         id:
           type: string
-          description: Unique identifier for the lead.
+          description: Unique identifier for the company.
         name:
           type: string
-          description: Name of the lead.
-        status:
-          type: string
-          enum:
-            - open
-            - converted
-            - archived
-          description: Current status of the lead.
-        unique_number:
-          type: string
-          description: Auto-generated unique number for the lead.
-        email:
+          description: Name of the company.
+        address:
           type: string
           nullable: true
-          description: Email address of the lead (from associated contact).
-        phone_number:
+          description: Address of the company.
+        source:
           type: string
           nullable: true
-          description: Phone number of the lead (from associated contact).
-        contact:
-          type: object
-          nullable: true
-          description: Associated contact.
-          properties:
-            id:
-              type: string
-              description: Unique identifier of the contact.
-            name:
-              type: string
-              description: Name of the contact.
-        company:
-          type: object
-          nullable: true
-          description: Associated company.
-          properties:
-            id:
-              type: string
-              description: Unique identifier of the company.
-            name:
-              type: string
-              description: Name of the company.
-        owner:
-          type: string
-          nullable: true
-          description: Owner of the lead.
+          description: Source of the company.
         tags:
           type: array
           items:
             $ref: '#/components/schemas/tag'
-          description: Tags associated with the lead.
+          description: Tags associated with the company.
         created_at:
           type: string
           format: date-time
-          description: Timestamp when the lead was created.
+          description: Timestamp when the company was created.
         updated_at:
           type: string
           format: date-time
-          description: Timestamp when the lead was last updated.
+          description: Timestamp when the company was last updated.
     pagination:
       type: object
       properties:
@@ -230,47 +198,29 @@ components:
         page_size:
           type: integer
           description: Number of records per page.
-    lead_list_response:
+    company_list_response:
       type: object
       properties:
-        leads:
+        companies:
           type: array
           items:
-            $ref: '#/components/schemas/lead'
-          description: List of leads.
+            $ref: '#/components/schemas/company'
+          description: List of companies.
         pagination:
           $ref: '#/components/schemas/pagination'
       example:
-        leads:
+        companies:
           - id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-            name: Eve
-            status: open
-            unique_number: L-001
-            email: eve@example.com
-            phone_number: ''
-            contact:
-              id: null
-              name: Eve
-            company:
-              id: null
-              name: null
-            owner: null
+            name: Eve Corp
+            address: 123 Main St, New York, NY
+            source: null
             tags: []
             created_at: '2025-03-15T10:30:00.000Z'
             updated_at: '2025-03-15T10:30:00.000Z'
           - id: b2c3d4e5-f6a7-8901-bcde-f12345678901
-            name: Oliver
-            status: converted
-            unique_number: L-002
-            email: oliver@example.com
-            phone_number: '+1555123456'
-            contact:
-              id: c1d2e3f4-a5b6-7890-cdef-123456789012
-              name: Oliver
-            company:
-              id: d2e3f4a5-b6c7-8901-def0-234567890123
-              name: Oliver Industries
-            owner: null
+            name: Oliver Industries
+            address: 456 Oak Ave, San Francisco, CA
+            source: null
             tags: []
             created_at: '2025-03-14T14:22:00.000Z'
             updated_at: '2025-03-14T14:22:00.000Z'
@@ -279,30 +229,22 @@ components:
           total_pages: 2
           current_page_number: 1
           page_size: 30
-    lead_request:
+    company_request:
       type: object
       properties:
-        lead:
+        company:
           type: object
           required:
             - name
           properties:
             name:
               type: string
-              description: Lead name.
-              example: Eve
-            status:
+              description: Company name.
+              example: Eve Corp
+            address:
               type: string
-              enum:
-                - open
-                - converted
-                - archived
-              description: Lead status.
-              example: open
-            owner_id:
-              type: string
-              description: Unique identifier of the owner.
-              example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+              description: Company address.
+              example: 123 Main St, New York, NY
             tag_ids:
               type: array
               items:
@@ -311,26 +253,24 @@ components:
               example:
                 - a1b2c3d4-e5f6-7890-abcd-ef1234567890
                 - b2c3d4e5-f6a7-8901-bcde-f12345678901
-    lead_response:
+    company_response:
       type: object
       properties:
-        lead:
-          $ref: '#/components/schemas/lead'
+        company:
+          $ref: '#/components/schemas/company'
       example:
-        lead:
+        company:
           id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-          name: Eve
-          status: open
-          unique_number: L-001
-          email: eve@example.com
-          phone_number: ''
-          contact:
-            id: null
-            name: Eve
-          company:
-            id: null
-            name: null
-          owner: null
+          name: Eve Corp
+          address: 123 Main St, New York, NY
+          source: null
           tags: []
           created_at: '2025-03-15T10:30:00.000Z'
           updated_at: '2025-03-15T10:30:00.000Z'
+    company_delete_response:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        message: Company deleted successfully

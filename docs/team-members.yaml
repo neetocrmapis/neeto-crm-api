@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: NeetoCRM Team Members APIs
-  version: 1.0.0
+  version: 2.0.0
 
 servers:
   $ref: '../schemas/common.yaml#/servers'
@@ -108,16 +108,8 @@ paths:
             format: uuid
             example: "13c02be6-8bd4-4dda-b9e6-07df53feb8a4"
       responses:
-        '200':
-          description: OK - Team member removed successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Team member has been removed"
+        '204':
+          description: No Content - Team member removed successfully
         '422':
           description: Unprocessable Entity - Cannot remove the last admin of the workspace
           content:
