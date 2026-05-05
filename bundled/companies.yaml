@@ -15,7 +15,7 @@ tags:
 paths:
   /companies:
     get:
-      summary: List all companies
+      summary: List companies
       tags:
         - Companies
       description: Retrieve a list of all companies in your workspace. Results are ordered by creation date (newest first).
@@ -31,7 +31,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/company_list_response'
     post:
-      summary: Create a company
+      summary: Create company
       tags:
         - Companies
       description: Create a new company in your workspace.
@@ -52,7 +52,7 @@ paths:
                 $ref: '#/components/schemas/company_response'
   /companies/{id}:
     get:
-      summary: Get a company
+      summary: Get company
       tags:
         - Companies
       description: Retrieve a single company by its ID.
@@ -72,7 +72,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/company_response'
     patch:
-      summary: Update a company
+      summary: Update company
       tags:
         - Companies
       description: Update an existing company by its ID.
@@ -98,7 +98,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/company_response'
     delete:
-      summary: Delete a company
+      summary: Delete company
       tags:
         - Companies
       description: Delete a company by its ID.

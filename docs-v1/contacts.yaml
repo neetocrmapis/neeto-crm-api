@@ -13,7 +13,7 @@ tags:
 paths:
   /contacts:
     get:
-      summary: List all contacts
+      summary: List contacts
       tags:
         - Contacts
       description: Retrieve a list of all contacts in your workspace. Results are ordered by creation date (newest first).
@@ -29,7 +29,7 @@ paths:
               schema:
                 $ref: '../schemas-v1/contact.yaml#/components/schemas/contact_list_response'
     post:
-      summary: Create a contact
+      summary: Create contact
       tags:
         - Contacts
       description: Create a new contact in your workspace.
@@ -51,7 +51,7 @@ paths:
 
   /contacts/{id}:
     get:
-      summary: Get a contact
+      summary: Get contact
       tags:
         - Contacts
       description: Retrieve a single contact by its ID.
@@ -71,7 +71,7 @@ paths:
               schema:
                 $ref: '../schemas-v1/contact.yaml#/components/schemas/contact_response'
     patch:
-      summary: Update a contact
+      summary: Update contact
       tags:
         - Contacts
       description: Update an existing contact by its ID.
@@ -97,7 +97,7 @@ paths:
               schema:
                 $ref: '../schemas-v1/contact.yaml#/components/schemas/contact_response'
     delete:
-      summary: Delete a contact
+      summary: Delete contact
       tags:
         - Contacts
       description: Delete a contact by its ID.
