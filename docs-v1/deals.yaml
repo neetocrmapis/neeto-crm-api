@@ -13,7 +13,7 @@ tags:
 paths:
   /deals:
     get:
-      summary: List all deals
+      summary: List deals
       tags:
         - Deals
       description: Retrieve a list of all deals in your workspace. Results are ordered by creation date (newest first).
@@ -29,7 +29,7 @@ paths:
               schema:
                 $ref: '../schemas-v1/deal.yaml#/components/schemas/deal_list_response'
     post:
-      summary: Create a deal
+      summary: Create deal
       tags:
         - Deals
       description: Create a new deal in your workspace.
@@ -51,7 +51,7 @@ paths:
 
   /deals/{id}:
     get:
-      summary: Get a deal
+      summary: Get deal
       tags:
         - Deals
       description: Retrieve a single deal by its ID.
@@ -71,7 +71,7 @@ paths:
               schema:
                 $ref: '../schemas-v1/deal.yaml#/components/schemas/deal_response'
     patch:
-      summary: Update a deal
+      summary: Update deal
       tags:
         - Deals
       description: Update an existing deal by its ID.
@@ -97,7 +97,7 @@ paths:
               schema:
                 $ref: '../schemas-v1/deal.yaml#/components/schemas/deal_response'
     delete:
-      summary: Delete a deal
+      summary: Delete deal
       tags:
         - Deals
       description: Delete a deal by its ID.

@@ -13,7 +13,7 @@ tags:
 paths:
   /leads:
     get:
-      summary: List all leads
+      summary: List leads
       tags:
         - Leads
       description: Retrieve a list of all leads in your workspace. Results are ordered by creation date (newest first).
@@ -29,7 +29,7 @@ paths:
               schema:
                 $ref: '../schemas/lead.yaml#/components/schemas/lead_list_response'
     post:
-      summary: Create a lead
+      summary: Create lead
       tags:
         - Leads
       description: Create a new lead in your workspace.
@@ -51,7 +51,7 @@ paths:
 
   /leads/{id}:
     get:
-      summary: Get a lead
+      summary: Get lead
       tags:
         - Leads
       description: Retrieve a single lead by its ID.
@@ -71,7 +71,7 @@ paths:
               schema:
                 $ref: '../schemas/lead.yaml#/components/schemas/lead_response'
     patch:
-      summary: Update a lead
+      summary: Update lead
       tags:
         - Leads
       description: Update an existing lead by its ID.
@@ -97,7 +97,7 @@ paths:
               schema:
                 $ref: '../schemas/lead.yaml#/components/schemas/lead_response'
     delete:
-      summary: Delete a lead
+      summary: Delete lead
       tags:
         - Leads
       description: Delete a lead by its ID.

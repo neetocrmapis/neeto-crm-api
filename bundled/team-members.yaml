@@ -123,7 +123,7 @@ paths:
                     type: string
                     example: Cannot remove the last admin of the workspace
     patch:
-      summary: Update team member details
+      summary: Update team member
       tags:
         - Team Members
       description: Update a team member.
