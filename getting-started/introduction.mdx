@@ -12,6 +12,109 @@ Before you start with NeetoCRM APIs you will need the following:
 1. [A NeetoCRM workspace](/getting-started/identifying-subdomain).
 2. [An API key](/getting-started/authentication).
 
+## Quick start
+
+Get started with the NeetoCRM API in minutes. Make your first API call and retrieve your contacts. You should have your [API key](/getting-started/authentication) & [subdomain](/getting-started/identifying-subdomain) ready with you.
+
+### Step 1: Make Your First API Call
+
+Let's retrieve all contacts in your workspace using a [GET request](https://en.wikipedia.org/wiki/HTTP#Request_methods):
+
+<CodeGroup>
+```bash curl
+curl -X GET "https://{your-subdomain}.neetocrm.com/api/external/v1/contacts" \
+  -H 'X-Api-Key: your-api-key' \
+  -H 'Content-Type: application/json'
+```
+
+```javascript JavaScript
+const response = await fetch(
+  "https://{your-subdomain}.neetocrm.com/api/external/v1/contacts",
+  {
+    method: "GET",
+    headers: {
+      "X-Api-Key": "your-api-key",
+      "Content-Type": "application/json",
+    },
+  }
+);
+
+const data = await response.json();
+console.log(data);
+```
+
+```python Python
+import requests
+
+url = "https://{your-subdomain}.neetocrm.com/api/external/v1/contacts"
+headers = {
+    "X-Api-Key": "your-api-key",
+    "Content-Type": "application/json"
+}
+
+response = requests.get(url, headers=headers)
+data = response.json()
+print(data)
+```
+
+</CodeGroup>
+
+<Warning>
+  Replace `your-subdomain` with your actual workspace subdomain and
+  `your-api-key` with your generated API key.
+</Warning>
+
+### Step 2: Understanding the Response
+
+A successful response will look like this [JSON](https://en.wikipedia.org/wiki/JSON) format:
+
+```json
+{
+  "contacts": [
+    {
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "phone_number": "+1234567890",
+      "owner": null,
+      "tags": [],
+      "company": {
+        "id": null,
+        "name": null
+      },
+      "created_at": "2024-01-01T00:00:00Z",
+      "updated_at": "2024-01-01T00:00:00Z"
+    }
+  ],
+  "pagination": {
+    "total_records": 1,
+    "total_pages": 1,
+    "current_page_number": 1,
+    "page_size": 30
+  }
+}
+```
+
+### Next Steps
+
+Now that you've made your first [API](https://en.wikipedia.org/wiki/API) call, you can:
+
+<CardGroup cols={3}>
+  <Card title='Explore API reference' href='/api-reference' icon='code'>
+    Browse all available endpoints and their detailed documentation.
+  </Card>
+  <Card title='Pagination' href='/getting-started/pagination' icon='list'>
+    Understand how to paginate through API responses efficiently.
+  </Card>
+  <Card
+    title='HTTP response codes'
+    href='/getting-started/response-codes'
+    icon='reply'
+  >
+    Learn what different response codes mean and how to handle them.
+  </Card>
+</CardGroup>
+
 <Card icon="question" title='Need help?'>
   Visit our [help center](https://help.neetocrm.com/) or contact us by sending
   an email to [support@neetocrm.com](mailto:support@neetocrm.com).
