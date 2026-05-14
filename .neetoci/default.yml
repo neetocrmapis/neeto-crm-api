@@ -5,6 +5,8 @@ plan: standard-2
 commands:
   - checkout
   - neetoci-version node 22.13
+  - npm i -g mint
+  - mint broken-links
   - yarn install --frozen-lockfile
   - yarn build
   - bash .neetoci/scripts/validate_bundled.sh
