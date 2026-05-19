@@ -95,7 +95,7 @@ paths:
       summary: Remove team member
       tags:
         - Team Members
-      description: Remove team members from the workspace.
+      description: Remove a team member from the workspace.
       parameters:
         - $ref: '../schemas-v1/common.yaml#/api_key_header'
         - $ref: '../schemas-v1/common.yaml#/accept_header'
@@ -106,7 +106,7 @@ paths:
           schema:
             type: string
             format: uuid
-            example: "13c02be6-8bd4-4dda-b9e6-07df53feb8a4"
+            example: "aaaabbbb-cccc-dddd-eeee-ffff00001111"
       responses:
         '200':
           description: OK - Team member removed successfully
@@ -130,7 +130,7 @@ paths:
                     example: "Cannot remove the last admin of the workspace"
 
     patch:
-      summary: Update team member
+      summary: Update team member details
       tags:
         - Team Members
       description: Update a team member.
@@ -144,7 +144,7 @@ paths:
           schema:
             type: string
             format: uuid
-            example: "13c02be6-8bd4-4dda-b9e6-07df53feb8a4"
+            example: "aaaabbbb-cccc-dddd-eeee-ffff00001111"
       requestBody:
         required: true
         content:
