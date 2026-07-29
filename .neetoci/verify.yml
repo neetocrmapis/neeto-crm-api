@@ -5,7 +5,7 @@ plan: standard-2
 paths:
   - package.json
   - yarn.lock
-  - .neetoci/default.yml
+  - .neetoci/verify.yml
   - .neetoci/scripts/**
   - scripts/**
   - docs.json
