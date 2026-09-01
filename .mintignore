@@ -2,3 +2,8 @@ docs/
 docs-v1/
 schemas/
 schemas-v1/
+.claude/
+.cursor/
+.husky/
+.neetoci/
+.env*
