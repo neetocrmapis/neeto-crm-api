@@ -1,7 +1,7 @@
 # NeetoCRM API Docs
 
 This repository contains the documentation for the
-[NeetoCRM APIs](https://apidocs.neetocrm.com/getting-started/introduction), built using
+[NeetoCRM APIs](https://apidocs.neetocrm.com/api/introduction), built using
 [Mintlify](https://mintlify.com/).
 
 ## Development Setup
